@@ -1,6 +1,8 @@
 import DashboardLayout from "../layout/DashboardLayout";
 import Categories from "../Pages/Categories/Categories";
 import OrderDatails from "../Pages/Categories/OrderDetails/OrderDatails";
+import AddAProduct from "../Pages/Dashboard/AddAProduct/AddAProduct";
+import AllSeller from "../Pages/Dashboard/AllSeller/AllSeller";
 import AllUsers from "../Pages/Dashboard/AllUser/AllUsers";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
@@ -54,6 +56,14 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/allUsers",
         element: <AllUsers />
+      },
+      {
+        path: "/dashboard/allSellers",
+        element: <AllSeller />
+      },
+      {
+        path: "/dashboard/addProduct",
+        element: <AddAProduct />
       },
     ],
   },

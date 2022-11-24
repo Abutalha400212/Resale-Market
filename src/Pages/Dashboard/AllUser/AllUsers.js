@@ -34,7 +34,7 @@ const AllUsers = () => {
               >
                 <div className="avatar placeholder">
                   <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
-                    <img src={user.img} alt="" />
+                    <img src={user?.img} alt="" />
                   </div>
                 </div>
               </th>

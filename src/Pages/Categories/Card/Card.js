@@ -7,7 +7,7 @@ const Card = ({item,handleShop}) => {
     const [wisthList,setWishlist] = useState(false)
   return (
     <div className="drop-shadow-xl rounded-md">
-      <div className="w-80 bg-white shadow rounded">
+      <div className="md:w-80 bg-white shadow rounded">
         <div
           className={`h-48 flex flex-col justify-between p-4  rounded-t-md `}
           style={{ backgroundImage: `url(${img})`,

@@ -15,3 +15,8 @@ export const usersByUserType = async (account) => {
   const data = await  res.json()
   return data
 };
+export const usersBySellerType = async (account) => {
+  const res = await fetch(`http://localhost:5000/users/seller?account=${account}`);
+  const data = await  res.json()
+  return data
+};
