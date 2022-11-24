@@ -13,15 +13,15 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                to="/"
+                to="/category"
                
               >
-                About
+             Category
               </Link>
             </li>
             <li>
               <Link
-                to="/"
+                to="/details"
                
               >
                 Services

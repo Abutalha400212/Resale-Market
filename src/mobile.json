@@ -1,0 +1,18 @@
+[
+  {
+    "brand": "samsung",
+    "seller": "Alfaz Hossen",
+    "posted": "27 Nov 2022",
+    "original": 1299,
+    "resale": 999,
+    "used": "2 month",
+    "features":"Bluetooth, Camera, Dual SIM, Expandable Memory, 3G, 4G",
+    "description":{
+        "name": "Nokia 5310",
+        "made": "veatnam",
+        "display": "2.4 inch 240x320 pixels",
+        "ram": "8MB RAM MT6260A",
+        "camera": "0.2MP"
+    }
+  }
+]
