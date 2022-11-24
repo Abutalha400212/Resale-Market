@@ -1,5 +1,7 @@
 import Categories from "../Pages/Categories/Categories";
 import OrderDatails from "../Pages/Categories/OrderDetails/OrderDatails";
+import Login from "../Pages/Login/Login";
+import Signup from "../Pages/Signup/Signup";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../layout/Main/Main");
@@ -13,6 +15,14 @@ export const router = createBrowserRouter([
         {
             path:'/',
             element:<Home/>
+        },
+        {
+            path:'/login',
+            element:<Login/>
+        },
+        {
+            path:'/signup',
+            element:<Signup/>
         },
         {
             path:'/category',

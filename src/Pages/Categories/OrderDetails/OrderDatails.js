@@ -43,28 +43,28 @@ const OrderDatails = () => {
           </div>
           <div>
             <h1>Description:</h1>
-            <ul class=" md:w-1/2 text-sm text-light mt-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 light:border-gray-600 dark:text-white">
-              <li class="py-2 px-4 w-full rounded-t-lg border-b border-gray-200 light:border-gray-600">
+            <ul className=" md:w-1/2 text-sm text-light mt-4 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 light:border-gray-600 dark:text-white">
+              <li className="py-2 px-4 w-full rounded-t-lg border-b border-gray-200 light:border-gray-600">
                Model: {description.name}
               </li>
-              <li class="py-2 px-4 w-full border-b border-gray-200 light:border-gray-600">
+              <li className="py-2 px-4 w-full border-b border-gray-200 light:border-gray-600">
                Made by {description.made}
               </li>
-              <li class="py-2 px-4 w-full border-b border-gray-200 light:border-gray-600">
+              <li className="py-2 px-4 w-full border-b border-gray-200 light:border-gray-600">
               Display: {description.display}
               </li>
-              <li class="py-2 px-4 w-full rounded-b-lg">Camera: {description.camera}</li>
-              <li class="py-2 px-4 w-full rounded-b-lg"> ram: {description.ram}</li>
+              <li className="py-2 px-4 w-full rounded-b-lg">Camera: {description.camera}</li>
+              <li className="py-2 px-4 w-full rounded-b-lg"> ram: {description.ram}</li>
             </ul>
           </div>
         </div>
       </div>
       <div className="md:w-4/12 border-2 p-2 max-h-screen rounded-2xl mt-2">
-        <ul class=" text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 light:border-gray-600 dark:text-white">
-          <li class="py-4 px-4 w-full rounded-t-lg border-b border-gray-200 text-lg dark:border-gray-600">
+        <ul className=" text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 light:border-gray-600 dark:text-white">
+          <li className="py-4 px-4 w-full rounded-t-lg border-b border-gray-200 text-lg dark:border-gray-600">
             For Sale By <span className="text-xl font-bold">{seller}</span>
           </li>
-          <li class="py-4 px-4 w-full border-b border-gray-200 dark:border-gray-600">
+          <li className="py-4 px-4 w-full border-b border-gray-200 dark:border-gray-600">
             <div className="flex justify-between">
               <PhoneIcon className="w-6 h-6 text-blue-800 " />
               <p className="hover:underline">01755327723</p>

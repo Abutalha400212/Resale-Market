@@ -1,7 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assest/logo.webp";
+import { AuthContext } from "../../../Context/AuthProvider";
 const Navbar = () => {
+    const navigate = useNavigate()
+    const {user,logOut}= useContext(AuthContext)
+    const handleLogOut =()=>{
+        logOut().then(()=>{
+            toast.success('Account LogOut')
+            navigate('/')
+        })
+    }
     const navItem = <>
      <li>
               <Link
@@ -24,7 +34,7 @@ const Navbar = () => {
                 to="/details"
                
               >
-                Services
+                Dashboard
               </Link>
             </li>
             <li>
@@ -32,7 +42,7 @@ const Navbar = () => {
                 to="/"
                
               >
-                Pricing
+                Advertise
               </Link>
             </li>
             <li>
@@ -40,12 +50,16 @@ const Navbar = () => {
                 to="/"
                 
               >
-                Contact
+               Blog
               </Link>
             </li>
     
     </>
-   
+   const authItem = <>
+  {user ? <button onClick={handleLogOut} className="btn btn-accent">Log Out</button> :<> <li><Link to='/login'>Login</Link></li>
+   <li><Link to='/signup'>SignUp</Link></li></>}
+   </>
+
   return (
     <div className="navbar bg-base-100">
     <div className="navbar-start">
@@ -57,7 +71,7 @@ const Navbar = () => {
           {navItem}
         </ul>
       </div>
-      <Link to='/'><img src={logo} class="h-6 mr-3 sm:h-9 " alt=""></img></Link>
+      <Link to='/'><img src={logo} className="h-6 mr-3 sm:h-9 " alt=""></img></Link>
     </div>
     <div className="navbar-center hidden lg:flex">
       <ul className="menu menu-horizontal p-0">
@@ -65,23 +79,9 @@ const Navbar = () => {
       </ul>
     </div>
     <div className="navbar-end">
-    <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img src="https://placeimg.com/80/80/people" />
-        </div>
-      </label>
-      <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <a className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </a>
-        </li>
-        <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+     <ul className="menu menu-horizontal p-0">
+        {authItem}
       </ul>
-    </div>
     </div>
   </div>
   );
