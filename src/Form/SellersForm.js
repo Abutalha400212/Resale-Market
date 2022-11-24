@@ -1,11 +1,18 @@
 import { BuildingLibraryIcon, ClipboardDocumentIcon, ShoppingCartIcon } from '@heroicons/react/24/solid';
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthProvider';
 
 const SellersForm = () => {
+  const {user} = useContext(AuthContext)
     return (
         <>
-        <h1 className='text-green-700 font-bold text-xl text-center underline'>Seller Account </h1>
+        <h1 className='text-green-700 font-bold text-xl ml-12 underline'>Seller Account </h1>
+        <div className="avatar ml-8 mt-5">
+        <div className="w-24 rounded-full">
+          <img className="w-full " src={user.photoURL} alt='' />
+        </div>
+      </div>
         <NavLink
         to='allUsers'
         className={({ isActive }) =>

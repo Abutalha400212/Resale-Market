@@ -49,7 +49,7 @@ const Signup = () => {
         name: user.displayName,
         img: user.photoURL,
         email: user.email,
-        account: "User",
+        account: "user",
       };
       userCollection(userData).then((data) => {
         if (data.acknowledged) {
@@ -164,7 +164,7 @@ const Signup = () => {
                 >
                   <option value={"seller"}>Seller</option>
                   <option selected value={"user"}>
-                    User
+                    user
                   </option>
                 </select>
               </div>
