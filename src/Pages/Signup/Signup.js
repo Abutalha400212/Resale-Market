@@ -1,35 +1,62 @@
 import { useForm } from "react-hook-form";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { userCollection } from "../../Api/UserCollection";
 import toast from "react-hot-toast";
+import { imageUpload } from "../../Api/ImageUploadApi";
+import { FaGoogle } from "react-icons/fa";
+import useToken from "../../hooks/useToken";
 const Signup = () => {
-  const { createUser, updateUser } = useContext(AuthContext);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { createUser, updateUser, googleLogin } = useContext(AuthContext);
+  const [checkEmail, setCheckEmail] = useState("");
+  const [token] = useToken(checkEmail)
+  const { register, handleSubmit } = useForm();
   const handleSignup = (data) => {
-    const user ={
-        name:data.name,
-        email:data.email,
-        account: data.accountType
-    }
-    createUser(data.email, data.password)
-      .then((result) => {
-        updateUser(data.name).then(() => {
-          userCollection(user).then((usedata) => {
-            if (usedata.acknowledged) {
-              toast.success(`${data.accountType} Account Created`);
-            }
-          });
-        }).catch(err=>console.log(err));
-        console.log(result.user);
-      })
-      .catch((err) => console.log(err));
+    const image = data.file[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    imageUpload(formData).then((Imgdata) => {
+      const user = {
+        name: data.name,
+        email: data.email,
+        account: data.accountType,
+        img: Imgdata.data.display_url,
+      };
+      console.log(user, Imgdata);
+      createUser(data.email, data.password)
+        .then((result) => {
+          setCheckEmail(result.user.email);
+          updateUser(data.name, Imgdata.data.display_url)
+            .then(() => {
+              userCollection(user).then((usedata) => {
+                if (usedata.acknowledged) {
+                  toast.success(`${data.accountType} Account Created`);
+                }
+              });
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
+    });
+    console.log(data);
+  };
+  const handleGoogleLogin = () => {
+    googleLogin().then((result) => {
+      const user = result.user;
+      setCheckEmail(user.email)
+      const userData = {
+        name: user.displayName,
+        img: user.photoURL,
+        email: user.email,
+        account: "User",
+      };
+      userCollection(userData).then((data) => {
+        if (data.acknowledged) {
+          toast.success("Google Login Successfully");
+        }
+      });
+    });
   };
   return (
     <div className="h-screen">
@@ -47,21 +74,13 @@ const Signup = () => {
               <div className="flex flex-row items-center justify-center lg:justify-start">
                 <p className="text-lg mb-0 mr-4">Sign Up with</p>
                 <button
+                  onClick={handleGoogleLogin}
                   type="button"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
-                  className="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
+                  className="inline-block p-3 bg-blue-600 text-white font-medium text-md leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 320 512"
-                    className="w-4 h-4"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
-                    />
-                  </svg>
+                  <FaGoogle />
                 </button>
 
                 <button
@@ -143,14 +162,25 @@ const Signup = () => {
                   {...register("accountType")}
                   className="select select-bordered"
                 >
-                  <option disabled selected>
-                    Pick one
-                  </option>
                   <option value={"seller"}>Seller</option>
-                  <option value={"user"}>User</option>
+                  <option selected value={"user"}>
+                    User
+                  </option>
                 </select>
               </div>
-
+              <div className="my-5">
+                <label
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  htmlFor="file_input"
+                >
+                  Upload file
+                </label>
+                <input
+                  {...register("file")}
+                  type="file"
+                  className="file-input w-full"
+                />
+              </div>
               <div className="text-center lg:text-left">
                 <button
                   type="submit"
