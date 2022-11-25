@@ -27,3 +27,11 @@ export const getAddedSellersProduct = async(email) =>{
   const data = await res.json()
   return data
 }
+
+export const deleteAddeddata = async(id) =>{
+const res = await fetch(`http://localhost:5000/myProducts/${id}`,{
+  method:'DELETE'
+})
+const data = res.json()
+return data
+}

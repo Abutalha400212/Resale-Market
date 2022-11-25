@@ -2,24 +2,26 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FaStoreAlt } from "react-icons/fa";
 import { imageUpload } from "../../../Api/ImageUploadApi";
-import { format} from 'date-fns'
+import { format } from "date-fns";
 import { addCategoryItem } from "../../../Api/CategoryApi";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../Context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 const AddAProduct = () => {
-  const {user}= useContext(AuthContext)
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const handleOrderSubmit = (data) => {
     const image = data.file[0];
     const productData = new FormData();
     productData.append("image", image);
     imageUpload(productData).then((imageProData) => {
-      const date = format(new Date(), 'dd/MM/yyyy')
-      const name = (data.brand).toUpperCase()
+      const date = format(new Date(), "dd/MM/yyyy");
+      const name = data.brand.toUpperCase();
       const newProduct = {
         brand: name,
         seller: data.name,
-        email:user.email,
+        email: user.email,
         posted: date,
         original: data.newPrice,
         resale: data.resalePrice,
@@ -36,11 +38,12 @@ const AddAProduct = () => {
         },
       };
       console.log(newProduct);
-      addCategoryItem(newProduct).then(data=>{
-        if(data.acknowledged){
-          toast.success(`${data.brand} product Successfully Added`)
+      addCategoryItem(newProduct).then((Adddata) => {
+        if (Adddata.acknowledged) {
+          navigate("/dashboard/myProducts");
+          toast.success(`${data.brand} product Successfully Added`);
         }
-      })
+      });
     });
   };
   return (

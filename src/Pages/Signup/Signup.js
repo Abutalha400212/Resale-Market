@@ -21,7 +21,7 @@ const Signup = () => {
         name: data.name,
         email: data.email,
         account: data.accountType,
-        img: Imgdata.data.display_url,
+        img: Imgdata.data.display_url
       };
       console.log(user, Imgdata);
       createUser(data.email, data.password)
@@ -49,7 +49,7 @@ const Signup = () => {
         name: user.displayName,
         img: user.photoURL,
         email: user.email,
-        account: "user",
+        account: "user"
       };
       userCollection(userData).then((data) => {
         if (data.acknowledged) {

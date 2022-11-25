@@ -35,7 +35,7 @@ const Login = () => {
         name: user.displayName,
         img: user.photoURL,
         email: user.email,
-        account: "user",
+        account: "user"
       };
       userCollection(userData).then((data) => {
         if (data.acknowledged) {
