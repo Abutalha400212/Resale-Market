@@ -12,6 +12,7 @@ const OrderDatails = () => {
     location,
     features,
     description,
+    email
   } = data;
   console.log(data);
   return (
@@ -60,15 +61,10 @@ const OrderDatails = () => {
         </div>
       </div>
       <div className="md:w-4/12 border-2 p-2 max-h-screen rounded-2xl mt-2">
-        <ul className=" text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 light:border-gray-600 dark:text-white">
-          <li className="py-4 px-4 w-full rounded-t-lg border-b border-gray-200 text-lg dark:border-gray-600">
-            For Sale By <span className="text-xl font-bold">{seller}</span>
-          </li>
-          <li className="py-4 px-4 w-full border-b border-gray-200 dark:border-gray-600">
-            <div className="flex justify-between">
-              <PhoneIcon className="w-6 h-6 text-blue-800 " />
-              <p className="hover:underline">01755327723</p>
-            </div>
+        <ul className=" text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 light:border-gray-600 dark:text-white text-center">
+          <li className="py-4 px-4 text-gray-700 w-full rounded-t-lg border-b border-gray-200 text-md dark:border-gray-600">
+            For Sale By <span className="text-xl font-semibold">{seller}</span>
+            <p className="text-sm text-gray-900 font-light">Contact With Email: {email}</p>
           </li>
         </ul>
         <h1 className="py-3 text-light text-gray-600">
