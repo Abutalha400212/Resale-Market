@@ -1,5 +1,6 @@
+import { BuildingStorefrontIcon, ShoppingBagIcon } from "@heroicons/react/24/solid";
 import React, { useContext } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 import AdminForm from "../Form/AdminForm";
 import SellersForm from "../Form/SellersForm";
@@ -17,6 +18,8 @@ const DashboardLayout = () => {
 {admin ? <AdminForm/> :<>
 {seller ? <SellersForm/> : <UserForm/>}
 </>}
+<Link to='/category' className="flex items-center mt-20 ml-5 underline"><ShoppingBagIcon className="w-6 h-6 font-extrabold mr-1"/>Back To Shop</Link>
+<Link to='/' className="flex items-center mt-5 ml-5 underline"><BuildingStorefrontIcon className="w-6 h-6 font-extrabold mr-1"/>Back To Home</Link>
       </div>
       <div className="flex-1 ">
         <Outlet />

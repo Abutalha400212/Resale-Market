@@ -4,11 +4,10 @@ const useVerified = (email) => {
   const [verify, setVerify] = useState("");
   useEffect(() => {
    if(email){
-    fetch(`http://localhost:5000/users/admin/${email}`)
+    fetch(`http://localhost:5000/users/verified/${email}`)
     .then((res) => res.json())
     .then((data) =>{
-      
-      setVerify(data.isAdmin)});
+      setVerify(data.isVerified)});
    }
   }, [email]);
   return [verify]

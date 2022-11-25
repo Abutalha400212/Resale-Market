@@ -1,3 +1,4 @@
+import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import Categories from "../Pages/Categories/Categories";
 import OrderDatails from "../Pages/Categories/OrderDetails/OrderDatails";
@@ -16,12 +17,14 @@ const { default: Home } = require("../Pages/Home/Home/Home");
 export const router = createBrowserRouter([
   {
     path: "/",
+    element: <Home />,
+    errorElement:<ErrorPage/>
+  },
+  {
+    path: "/",
     element: <Main />,
+    errorElement:<ErrorPage/>,
     children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
       {
         path: "/login",
         element: <Login />,
@@ -32,6 +35,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/category",
+        loader:()=> fetch('http://localhost:5000/allItem'),
         element: <Categories />,
       },
       {

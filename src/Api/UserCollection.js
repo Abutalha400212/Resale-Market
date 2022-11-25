@@ -31,8 +31,8 @@ export const deleteUserAccount = async (id) => {
   const data = res.json();
   return data;
 };
-export const userVerify = async (id) => {
-  const res = await fetch(`http://localhost:5000/users/seller/${id}`, {
+export const userVerify = async (email) => {
+  const res = await fetch(`http://localhost:5000/users/seller/${email}`, {
     method: "PUT",
     headers:{
       'content-type':'application/json'

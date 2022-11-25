@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import "./Card.css";
 import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/24/solid'
 import { Link } from "react-router-dom";
+import useVerified from "../../../hooks/useVerified";
+import verifyImg from '../../../assest/Image/verified.png'
 const Card = ({item,handleShop}) => {
+  const [verify] = useVerified(item.email)
     const {brand,seller,posted,original,resale,used,img,location,_id} = item
     const [wisthList,setWishlist] = useState(false)
   return (
@@ -39,12 +42,17 @@ const Card = ({item,handleShop}) => {
           </div>
         </div>
         <div className="p-4 flex flex-col items-center">
-          <p className="text-gray-400 font-light text-xs text-center">
-            {seller}
+          <p className="text-gray-900 font-mono text-sm text-center flex justify-center items-center uppercase">
+            {seller}{verify && <div className="avatar tooltip tooltip-primary" data-tip="Verified">
+        <div className="w-6 rounded-full">
+          <img className="w-full " src={verifyImg} alt='' />
+        </div>
+      </div>}
           </p>
             <p className="text-gray-400 font-light text-xs text-center">Location:{location}</p>
             <p className="text-gray-400 font-light text-xs text-center">Posted on : {posted}</p>
           <h1 className="text-gray-600 text-center mt-1 font-bold uppercase">{brand}</h1>
+          <p className="text-gray-700 font-light text-sm text-center">Model: {item.description.name}</p>
          <div className="flex justify-between gap-x-2 text-gray-700  font-light">
          <p className="text-center  mt-1 text-sm">Original Price : ৳ <span className="line-through font-semibold">{original}</span></p>
          <p className="text-center  mt-1 text-sm">Resale Price : ৳ <span className="font-bold text-blue-900">{resale}</span></p>
@@ -55,8 +63,8 @@ const Card = ({item,handleShop}) => {
           </Link>
 
        <Link to={`/categoriesItemDetails/${_id}`}
-       >   <button className="px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50 mt-4 w-full flex items-center justify-center">
-           Booking Now <ShoppingCartIcon className="h-6 w-6 my-2 mx-1"/>
+       >   <button className=" w-full flex items-center justify-center btn btn-primary hover:btn-info my-1">
+           Booking Now <ShoppingCartIcon className="h-6 w-6 "/>
           </button></Link>
         </div>
       </div>

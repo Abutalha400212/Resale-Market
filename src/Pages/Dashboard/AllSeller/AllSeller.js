@@ -14,7 +14,7 @@ const AllSeller = () => {
       })
     }
     const handleVerify = user =>{
-      userVerify(user._id).then(data =>{
+      userVerify(user.email).then(data =>{
         if(data.acknowledged){
           toast.success(`${user.name} is Verified Seller`)
         }

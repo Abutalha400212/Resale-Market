@@ -2,17 +2,26 @@ import { BuildingLibraryIcon, ClipboardDocumentIcon, ShoppingCartIcon } from '@h
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';
-
-const SellersForm = () => {
+import useVerified from '../hooks/useVerified';
+import img from '../assest/Image/verified.png'
+const SellersForm = () => { 
   const {user} = useContext(AuthContext)
+  const [verify] = useVerified(user.email)
+ console.log(verify);
     return (
         <>
-        <h1 className='text-green-700 font-bold text-xl ml-8 underline'>Seller Account </h1>
-        <div className="avatar ml-8 mt-5">
+        <div className="avatar flex justify-center mt-10">
         <div className="w-24 rounded-full">
           <img className="w-full " src={user.photoURL} alt='' />
         </div>
       </div>
+      <h1 className='text-gray-700 font-mono text-xl text-center'>Seller Account</h1>
+      <p className='flex justify-center items-center'>{user.email}{verify && <div className="avatar tooltip tooltip-primary uppercase"data-tip="Verified">
+        <div className="w-6 rounded-full">
+          <img className="w-full " src={img} alt='' />
+        </div>
+      </div>} </p>
+      
         <NavLink
         to='myProducts'
         className={({ isActive }) =>

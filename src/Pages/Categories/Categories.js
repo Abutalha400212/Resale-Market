@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { category, categoryItem } from "../../Api/CategoryApi";
 import Card from "./Card/Card";
 
-const Categories = () => {
-  const [categories, setCategories] = useState([]);
+const Categories = () => { 
   const [categoriesItem, setCategoriesItem] = useState([]);
+  const [categories, setCategories] = useState([]);
+ 
 
   category().then((data) => {
     console.log(data);
@@ -31,20 +32,21 @@ const Categories = () => {
         </div>
       </div>
       <div className="flex-1">
-        <div className="mb-5">
+        <div className="mb-2">
           <h1 className="font-bold text-2xl mb-2 text-center text-gray-800 underline ">
             {" "}
             Phone Fetures
           </h1>
-          <div className="md:flex justify-between">
+          <div className="md:flex justify-between text-gray-400 font-light text-xs">
             <p className="font-serif">
               {" "}
               Sort by: <span className="font-bold">Best selling</span>
             </p>
             <p className="font-semibold">{categoriesItem.length} products</p>
-            <p className="font-semibold">Preview is good</p>
+            <p className="font-semibold">Product is good</p>
           </div>
         </div>
+        <hr className="mb-2" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {categoriesItem.map((item) => (
             <Card item={item} />
