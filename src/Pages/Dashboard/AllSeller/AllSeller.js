@@ -21,10 +21,13 @@ const AllSeller = () => {
       })
     }
     return (
-        <div className="overflow-x-auto relative  mt-10">
-        <table className="w-full text-sm  text-gray-500 dark:text-gray-400 text-center">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <div className="overflow-x-auto  mt-10">
+        <table className="w-full table">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
             <tr>
+              <th scope="col" className="py-2 px-5">
+                Q.
+              </th>
               <th scope="col" className="py-2 px-5">
                 Users Photo
               </th>
@@ -42,9 +45,10 @@ const AllSeller = () => {
               </th>
             </tr>
           </thead>
-          <tbody>
-            {users.map((user) => (
+          <tbody className='text-gray-600 font-mono text-center'>
+            {users.map((user,i) => (
               <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td className="py-2 px-5">{i+1}</td>
                 <th
                   scope="row"
                   className="py-2 px-5 font-medium text-gray-900 whitespace-nowrap dark:text-white"

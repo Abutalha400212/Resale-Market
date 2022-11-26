@@ -4,7 +4,10 @@ export const category = async () => {
   return data;
 };
 
-
+export const allItem = async()=>{
+  const res = await fetch("http://localhost:5000/allItem")
+  const data = res.json()
+}
 export const categoryItem =  async (brand)=>{
     const res = await fetch(`http://localhost:5000/categoriesItem?brand=${brand}`)
     const data = await res.json()

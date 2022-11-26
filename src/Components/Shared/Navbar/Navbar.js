@@ -2,7 +2,7 @@ import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { Link,NavLink, useNavigate } from "react-router-dom";
-import logo from "../../../assest/logo.webp";
+import { allItem } from "../../../Api/CategoryApi";
 import { AuthContext } from "../../../Context/AuthProvider";
 const Navbar = () => {
     const navigate = useNavigate()
@@ -13,6 +13,7 @@ const Navbar = () => {
             navigate('/')
         })
     }
+
     const navItem = <>
      <li>
                <NavLink

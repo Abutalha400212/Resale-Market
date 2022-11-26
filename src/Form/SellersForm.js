@@ -7,7 +7,6 @@ import img from '../assest/Image/verified.png'
 const SellersForm = () => { 
   const {user} = useContext(AuthContext)
   const [verify] = useVerified(user.email)
- console.log(verify);
     return (
         <>
         <div className="avatar flex justify-center mt-10">
@@ -15,7 +14,7 @@ const SellersForm = () => {
           <img className="w-full " src={user.photoURL} alt='' />
         </div>
       </div>
-      <h1 className='text-gray-700 font-mono text-xl text-center'>Seller Account</h1>
+      <h1 className='text-gray-700 font-mono text-xl text-center'>Seller </h1>
       <p className='flex justify-center items-center'>{user.email}{verify && <div className="avatar tooltip tooltip-primary uppercase"data-tip="Verified">
         <div className="w-6 rounded-full">
           <img className="w-full " src={img} alt='' />

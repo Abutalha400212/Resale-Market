@@ -19,10 +19,13 @@ const MyProducts = () => {
     });
   };
   return (
-    <div className="overflow-x-auto relative  mt-10">
-      <table className="w-full text-sm  text-gray-500 dark:text-gray-400 text-center">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <div className="overflow-x-auto  mt-10">
+      <table className="w-full table">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
           <tr>
+            <th scope="col" className="py-2">
+             Q.
+            </th>
             <th scope="col" className="py-2">
               Product Photo
             </th>
@@ -43,9 +46,10 @@ const MyProducts = () => {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {products.map((product) => (
+        <tbody className="text-center text-gray-600 font-mono">
+          {products.map((product,i) => (
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <td>{i+1}</td>
               <th
                 scope="row"
                 className="py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"

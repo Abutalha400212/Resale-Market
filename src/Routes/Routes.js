@@ -1,5 +1,6 @@
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import DashboardLayout from "../layout/DashboardLayout";
+import AllProducts from "../Pages/AllProducts/AllProducts";
 import Categories from "../Pages/Categories/Categories";
 import AddAProduct from "../Pages/Dashboard/AddAProduct/AddAProduct";
 import AllSeller from "../Pages/Dashboard/AllSeller/AllSeller";
@@ -8,6 +9,7 @@ import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
+import Payment from "../Payment/Payment";
 import PrivateRoute from "./PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -36,7 +38,11 @@ export const router = createBrowserRouter([
       {
         path: "/category",
         element: <Categories />
-      }
+      },
+      {
+        path: "/category",
+        element: <AllProducts/>
+      },
     ],
   },
   {
@@ -67,6 +73,11 @@ export const router = createBrowserRouter([
         path:"/dashboard/myOrders",
         element:<MyOrders/>
       },
+      {
+        path:'/dashboard/payment/:id',
+        loader:({params})=> fetch(`http://localhost:5000/booking/${params.id}`),
+        element:<Payment/>
+      }
     ],
   },
 ]);

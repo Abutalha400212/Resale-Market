@@ -42,3 +42,14 @@ export const userVerify = async (email) => {
   const data = await res.json();
   return data;
 };
+export const soldProduct = async (id) => {
+  const res = await fetch(`http://localhost:5000/products/${id}`, {
+    method: "PUT",
+    headers:{
+      'content-type':'application/json'
+    },
+    body: JSON.stringify({ status: "Sold" }),
+  });
+  const data = await res.json();
+  return data;
+};

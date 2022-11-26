@@ -2,12 +2,13 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { bookingOrder } from "../../../Api/OrderBooking";
+import { soldProduct } from "../../../Api/UserCollection";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 const OrderModal = ({ item, setHandleShop }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const { resale, description } = item;
+  const { resale, description,_id } = item;
   const handleBooking = (e) => {
     e.preventDefault();
     const phone = e.target.phone.value;
@@ -24,6 +25,7 @@ const OrderModal = ({ item, setHandleShop }) => {
       if (data.acknowledged) {
         toast.success(`${description.name} item booked`);
         setHandleShop(null);
+        soldProduct(_id).then(data=>console.log(data))
         navigate("/dashboard/myOrders");
       }
     });
@@ -35,40 +37,40 @@ const OrderModal = ({ item, setHandleShop }) => {
         <div className="modal-box">
           <div className="card bg-base-100 shadow-xl flex-1 ">
             <section className="Uneditable text-sm">
-              <div class="form-control w-11/12 mx-auto mb-2 mt-4">
+              <div className="form-control w-11/12 mx-auto mb-2 mt-4">
                 <input
                   type="text"
                   disabled
                   defaultValue={user.displayName}
                   placeholder="Type here"
-                  class="input input-bordered w-full text-sm input-sm "
+                  className="input input-bordered w-full text-sm input-sm "
                 />
               </div>
-              <div class="form-control w-11/12 mx-auto mb-2">
+              <div className="form-control w-11/12 mx-auto mb-2">
                 <input
                   type="email"
                   disabled
                   defaultValue={user?.email}
                   placeholder="Type here"
-                  class="input input-bordered w-full text-sm input-sm "
+                  className="input input-bordered w-full text-sm input-sm "
                 />
               </div>
-              <div class="form-control w-11/12 mx-auto mb-2">
+              <div className="form-control w-11/12 mx-auto mb-2">
                 <input
                   type="text"
                   disabled
                   defaultValue={description?.name}
                   placeholder="Type here"
-                  class="input input-bordered w-full text-sm input-sm  "
+                  className="input input-bordered w-full text-sm input-sm  "
                 />
               </div>
-              <div class="form-control w-11/12 mx-auto">
+              <div className="form-control w-11/12 mx-auto">
                 <input
                   type="text"
                   disabled
                   defaultValue={`৳ ${resale}`}
                   placeholder="Type here"
-                  class="input input-bordered w-full input-sm text-sm "
+                  className="input input-bordered w-full input-sm text-sm "
                 />
               </div>
             </section>
@@ -100,37 +102,37 @@ const OrderModal = ({ item, setHandleShop }) => {
                   <h1 className="text-xs text-gray-600 text-center underline">
                     Make sure give your information{" "}
                   </h1>
-                  <div class="form-control w-full">
-                    <label class="label m-0">
-                      <span class="label-text text-xs">Phone No.</span>
+                  <div className="form-control w-full">
+                    <label className="label m-0">
+                      <span className="label-text text-xs">Phone No.</span>
                     </label>
                     <input
                       type="tel"
                       name="phone"
                       placeholder="Phone No:"
                       required
-                      class="input input-bordered w-full input-sm m-0"
+                      className="input input-bordered w-full input-sm m-0"
                     />
                   </div>
-                  <div class="form-control w-full">
-                    <label class="label m-0">
-                      <span class="label-text text-xs">Metting Location</span>
+                  <div className="form-control w-full">
+                    <label className="label m-0">
+                      <span className="label-text text-xs">Metting Location</span>
                     </label>
                     <input
                       type="text"
                       name="location"
                       required
                       placeholder="Meeting Location:"
-                      class="input input-bordered w-full input-sm m-0"
+                      className="input input-bordered w-full input-sm m-0"
                     />
                   </div>
                 </div>
               </div>
-              <div class=" md:flex justify-center mt-2">
+              <div className=" md:flex justify-center mt-2">
                 <label htmlFor="order-modal" className="btn btn-sm btn-warning">
                   Cancel
                 </label>
-                <button className="btn btn-sm btn-success ml-3">Booking</button>
+                <button disabled={item.status} className="btn btn-sm btn-success ml-3">Booking</button>
               </div>
             </form>
           </div>

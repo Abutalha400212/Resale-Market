@@ -4,17 +4,18 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 
 const UserForm = () => {
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   return (
     <>
-      <h1 className="text-green-700 font-bold text-xl ml-8 underline">
-        General User{" "}
-      </h1>
-      <div className="avatar ml-8 mt-5">
+      <div className="avatar flex justify-center mt-10">
         <div className="w-24 rounded-full">
-          <img className="w-full " src={user.photoURL} alt='' />
+          <img className="w-full " src={user.photoURL} alt="" />
         </div>
       </div>
+      <h1 className="text-gray-700 font-mono text-xl text-center">
+        General User
+      </h1>
+      <p className="flex justify-center items-center">{user.email} </p>
       <NavLink
         to="myOrders"
         className={({ isActive }) =>
