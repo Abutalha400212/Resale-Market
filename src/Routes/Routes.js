@@ -1,10 +1,10 @@
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import Categories from "../Pages/Categories/Categories";
-import OrderDatails from "../Pages/Categories/OrderDetails/OrderDatails";
 import AddAProduct from "../Pages/Dashboard/AddAProduct/AddAProduct";
 import AllSeller from "../Pages/Dashboard/AllSeller/AllSeller";
 import AllUsers from "../Pages/Dashboard/AllUser/AllUsers";
+import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
@@ -35,19 +35,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "/category",
-        loader:()=> fetch('http://localhost:5000/allItem'),
-        element: <Categories />,
-      },
-      {
-        path: "/categoriesItemDetails/:id",
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/categoriesItemDetails/${params.id}`),
-        element: (
-          <PrivateRoute>
-            <OrderDatails />
-          </PrivateRoute>
-        ),
-      },
+        element: <Categories />
+      }
     ],
   },
   {
@@ -73,7 +62,11 @@ export const router = createBrowserRouter([
       {
         path:"/dashboard/myProducts",
         element:<MyProducts/>
-      }
+      },
+      {
+        path:"/dashboard/myOrders",
+        element:<MyOrders/>
+      },
     ],
   },
 ]);

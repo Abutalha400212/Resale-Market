@@ -4,7 +4,7 @@ import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/24/solid'
 import { Link } from "react-router-dom";
 import useVerified from "../../../hooks/useVerified";
 import verifyImg from '../../../assest/Image/verified.png'
-const Card = ({item,handleShop}) => {
+const Card = ({item,setHandleShop}) => {
   const [verify] = useVerified(item.email)
     const {brand,seller,posted,original,resale,used,img,location,_id} = item
     const [wisthList,setWishlist] = useState(false)
@@ -62,12 +62,13 @@ const Card = ({item,handleShop}) => {
             Add to Wishlist <HeartIcon className={`h-6 w-6 mx-1 ${wisthList && 'text-red-600'}`}/>
           </Link>
 
-       <Link to={`/categoriesItemDetails/${_id}`}
-       >   <button className=" w-full flex items-center justify-center btn btn-primary hover:btn-info my-1">
+      
+         <label onClick={()=>setHandleShop(item)} htmlFor="order-modal" className=" w-full flex items-center justify-center btn btn-primary hover:btn-info my-1">
            Booking Now <ShoppingCartIcon className="h-6 w-6 "/>
-          </button></Link>
+          </label>
         </div>
       </div>
+     
     </div>
   );
 };

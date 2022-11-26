@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { category, categoryItem } from "../../Api/CategoryApi";
 import Card from "./Card/Card";
+import OrderModal from "./OrderDetails/OrderModal";
 
 const Categories = () => { 
+  const [handleShop,setHandleShop] = useState(null)
   const [categoriesItem, setCategoriesItem] = useState([]);
   const [categories, setCategories] = useState([]);
  
 
   category().then((data) => {
-    console.log(data);
     setCategories(data)});
   const handleCategoryData = (item) => {
     categoryItem(item).then((data) => setCategoriesItem(data));
@@ -20,16 +21,23 @@ const Categories = () => {
         <h1 className="text-2xl text-gray-600 font-bold mb-5 ml-5 underline ">
           Category Item{" "}
         </h1>
-        <div className="md:w-56 flex flex-col gap-2">
+        <ul className="menu menu-compact dropdown-content gap-3 mt-3 p-2 shadow bg-transparent rounded-box md:w-52">
           {categories.map((category) => (
-            <button
-              onClick={() => handleCategoryData(category)}
-              className="btn w-full btn-outline"
-            >
-              {category}
-            </button>
+                    <li>
+                    <button
+           onClick={() => handleCategoryData(category)}
+             className={({ isActive }) =>
+               `flex items-center px-4 m-0.5 rounded-md transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                 isActive ? 'bg-gray-400  text-gray-700' : 'bg-gray-100'
+               }`
+             }
+           >
+         
+             <span className=' font-medium'>{category}</span>
+           </button>
+                 </li>
           ))}
-        </div>
+        </ul>
       </div>
       <div className="flex-1">
         <div className="mb-2">
@@ -49,10 +57,11 @@ const Categories = () => {
         <hr className="mb-2" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {categoriesItem.map((item) => (
-            <Card item={item} />
+            <Card item={item} setHandleShop={setHandleShop} />
           ))}
         </div>
       </div>
+      { handleShop &&<OrderModal item={handleShop} setHandleShop={setHandleShop}/>}
     </div>
   );
 };
