@@ -1,7 +1,7 @@
 import React from 'react';
-import caro1 from '../../assest/Image/caro-1.webp'
-import caro2 from '../../assest/Image/caro-2.webp'
-import caro3 from '../../assest/Image/caro-3.jpg'
+import caro1 from '../../assest/Image/caro1.avif'
+import caro2 from '../../assest/Image/caro3.avif'
+import caro3 from '../../assest/Image/caro2.jpg'
 import './Carosel.css'
 const Carousel = () => {
     return (

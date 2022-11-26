@@ -11,7 +11,7 @@ const OrderConfirm = ({data}) => {
     useEffect(()=>{
         fetch("http://localhost:5000/create-payment-intent", {
             method: "POST",
-            headers: { "Content-Type": "application/json"},
+            headers: { "content-type": "application/json"},
             body: JSON.stringify({ price}),
           })
             .then((res) => res.json())

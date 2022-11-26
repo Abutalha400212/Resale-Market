@@ -1,6 +1,5 @@
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import DashboardLayout from "../layout/DashboardLayout";
-import AllProducts from "../Pages/AllProducts/AllProducts";
 import Categories from "../Pages/Categories/Categories";
 import AddAProduct from "../Pages/Dashboard/AddAProduct/AddAProduct";
 import AllSeller from "../Pages/Dashboard/AllSeller/AllSeller";
@@ -10,7 +9,10 @@ import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import Payment from "../Payment/Payment";
+import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
+import SellerRoute from "./SellerRoute";
+import UserRoute from "./UserRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../layout/Main/Main");
@@ -20,12 +22,12 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-    errorElement:<ErrorPage/>
+    errorElement: <ErrorPage />,
   },
   {
     path: "/",
     element: <Main />,
-    errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/login",
@@ -37,11 +39,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/category",
-        element: <Categories />
-      },
-      {
-        path: "/category",
-        element: <AllProducts/>
+        element: <Categories />,
       },
     ],
   },
@@ -55,29 +53,54 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/allUsers",
-        element: <AllUsers />
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/allSellers",
-        element: <AllSeller />
+        element: (
+          <AdminRoute>
+            <AllSeller />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/addProduct",
-        element: <AddAProduct />
+        element: (
+          <SellerRoute>
+            <AddAProduct />
+          </SellerRoute>
+        ),
       },
       {
-        path:"/dashboard/myProducts",
-        element:<MyProducts/>
+        path: "/dashboard/myProducts",
+        element: (
+          <SellerRoute>
+            <MyProducts />
+          </SellerRoute>
+        ),
       },
       {
-        path:"/dashboard/myOrders",
-        element:<MyOrders/>
+        path: "/dashboard/myOrders",
+        element: (
+          <UserRoute>
+            <MyOrders />
+          </UserRoute>
+        ),
       },
       {
-        path:'/dashboard/payment/:id',
-        loader:({params})=> fetch(`http://localhost:5000/booking/${params.id}`),
-        element:<Payment/>
-      }
+        path: "/dashboard/payment/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/booking/${params.id}`),
+        element: (
+          <UserRoute>
+            <Payment />
+          </UserRoute>
+        ),
+      },
     ],
   },
 ]);

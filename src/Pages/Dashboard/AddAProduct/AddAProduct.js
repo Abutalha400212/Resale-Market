@@ -20,9 +20,10 @@ const AddAProduct = () => {
       const name = data.brand.toUpperCase();
       const newProduct = {
         brand: name,
-        seller: data.name,
+        seller: user?.displayName,
         email: user.email,
         posted: date,
+        phone:data.phone,
         original: data.newPrice,
         resale: data.resalePrice,
         used: data.usingTime,
@@ -59,7 +60,8 @@ const AddAProduct = () => {
           <div className="relative z-0 mb-6 w-full group">
             <input
               type="text"
-              {...register("name")}
+              defaultValue={user?.displayName}
+              disabled
               id="floating-name"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
@@ -67,6 +69,7 @@ const AddAProduct = () => {
             />
             <label
               htmlFor="floating-name"
+            
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
               Your Name
@@ -75,8 +78,7 @@ const AddAProduct = () => {
           <div className="relative z-0 mb-6 w-full group">
             <input
               type="email"
-              {...register("email")}
-              defaultValue={user.email}
+              defaultValue={user?.email}
               disabled
               id="floating_email"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -91,7 +93,8 @@ const AddAProduct = () => {
             </label>
           </div>
         </div>
-        <div className="relative z-0 mb-6 w-full group">
+       <div className="grid md:grid-cols-2 md:gap-6">
+       <div className="relative z-0 mb-6 w-full group">
           <input
             type="text"
             {...register("address")}
@@ -107,6 +110,23 @@ const AddAProduct = () => {
             Address (Mirpur heart foundation, Mirpur-10, Dhaka, Bangladesh)
           </label>
         </div>
+        <div className="relative z-0 mb-6 w-full group">
+          <input
+            type="tel"
+            {...register("phone")}
+            id="floating_phone"
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" "
+            required
+          />
+          <label
+            htmlFor="floating_phone"
+            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >
+           Phone No.
+          </label>
+        </div>
+       </div>
         <div className="grid md:grid-cols-2 md:gap-6">
           <div className="relative z-0 mb-6 w-full group">
             <input

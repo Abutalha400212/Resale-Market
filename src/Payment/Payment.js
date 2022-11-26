@@ -3,7 +3,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLoaderData } from 'react-router-dom';
 import OrderConfirm from './OrderConfirm';
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET);
+const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_CODE}`);
 const Payment = () => {
     const data = useLoaderData()
     return (

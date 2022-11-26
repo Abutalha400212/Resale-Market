@@ -46,7 +46,8 @@ const OrderModal = ({ item, setHandleShop }) => {
                   className="input input-bordered w-full text-sm input-sm "
                 />
               </div>
-              <div className="form-control w-11/12 mx-auto mb-2">
+            <div className="flex justify-center">
+            <div className="form-control  mx-auto mb-2">
                 <input
                   type="email"
                   disabled
@@ -55,6 +56,16 @@ const OrderModal = ({ item, setHandleShop }) => {
                   className="input input-bordered w-full text-sm input-sm "
                 />
               </div>
+              <div className="form-control mx-auto mb-2">
+                <input
+                  type="text"
+                  disabled
+                  defaultValue={item?.phone}
+                  placeholder="Type here"
+                  className="input input-bordered w-full text-sm input-sm "
+                />
+              </div>
+            </div>
               <div className="form-control w-11/12 mx-auto mb-2">
                 <input
                   type="text"
