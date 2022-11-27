@@ -10,3 +10,28 @@ export const bookingOrder = async (order) => {
   const data = await res.json();
   return data;
 };
+
+export const confirmPayment = async (payment) => {
+  const res = await fetch(`http://localhost:5000/payments`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("accessToken")}`,
+    },
+    body: JSON.stringify(payment),
+  });
+  const data = await res.json();
+  return data;
+};
+export const confirmPaymentUpdate = async (id) => {
+  const res = await fetch(`http://localhost:5000/orders/${id}`, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("accessToken")}`,
+    },
+    body: JSON.stringify({status:"paid"}),
+  });
+  const data = await res.json();
+  return data;
+};

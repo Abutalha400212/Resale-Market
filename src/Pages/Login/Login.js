@@ -9,7 +9,6 @@ import useToken from "../../hooks/useToken";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
   const from = location.state?.from?.pathname || "/";
   const { signIn, googleLogin } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
@@ -35,7 +34,7 @@ const Login = () => {
         name: user.displayName,
         img: user.photoURL,
         email: user.email,
-        account: "user"
+        account: "user",
       };
       userCollection(userData).then((data) => {
         if (data.acknowledged) {

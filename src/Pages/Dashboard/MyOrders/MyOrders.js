@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState } from "react";
+import React, { useContext} from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { advertiseCollect } from "../../../Api/AdvertiseCollection";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 const MyOrders = () => {
-  const [advertiseShow, setAdvertiseShow] = useState(false);
-  const { user, advertise, setAdvertise } = useContext(AuthContext);
+  const { user} = useContext(AuthContext);
   const { data: products=[], isLoading } = useQuery({
     queryKey: ["booking", user?.email],
     queryFn: () =>
@@ -14,8 +15,15 @@ const MyOrders = () => {
       ),
   });
   const handleAdvertise = (product) => {
-    advertise.push(product);
-    console.log(advertise);
+   delete product._id
+   advertiseCollect(product).then(data =>{
+if(data.success){
+toast.success('Your Product is an Advertised now')
+}
+else{
+  toast.error(data.message)
+}
+   })
   };
 
   if (isLoading) {
@@ -67,9 +75,8 @@ const MyOrders = () => {
               <td className="py-2">{product.date}</td>
               <td className="py-2">
                 <button
-                  disabled={advertiseShow}
+                disabled={product.status}
                   onClick={() => {
-                    setAdvertiseShow(true);
                     handleAdvertise(product);
                   }}
                   className="btn btn-sm btn-success"
@@ -78,7 +85,8 @@ const MyOrders = () => {
                 </button>
               </td>
               <td className="py-2">
-                <Link to={`/dashboard/payment/${product._id}`}><button className="btn btn-sm btn-primary">Pay</button></Link>
+                {product.price && !product.status && <Link to={`/dashboard/payment/${product._id}`}><button className="btn btn-sm btn-primary">Pay</button></Link>}
+             {   product.price && product.status && <span className="text-primary">Paid</span>}
               </td>
             </tr>
           ))}

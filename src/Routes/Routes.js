@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
       {
         path: "/category",
         element: <Categories />,
-      },
+      }
     ],
   },
   {
@@ -93,8 +93,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/payment/:id",
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/booking/${params.id}`),
+        loader: ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`),
         element: (
           <UserRoute>
             <Payment />

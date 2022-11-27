@@ -6,11 +6,11 @@ const UserRoute = ({children}) => {
     const location = useLocation();
     const { user,loading } = useContext(AuthContext);
     const [users,userLoading] = useUser(user?.email)
-    if(loading&&userLoading){
+    if(loading||userLoading){
       return <progress className="progress w-56"></progress>
     }
     if (!user&&!users) {
-      return <Navigate to={"/login"} state={{ from: location }}></Navigate>;
+      return <Navigate to={"/login"} state={{ from: location }} replace></Navigate>;
     }
   
     return children;

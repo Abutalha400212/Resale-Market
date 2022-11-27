@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { bookingOrder } from "../../../Api/OrderBooking";
 import { soldProduct } from "../../../Api/UserCollection";
@@ -8,11 +9,12 @@ import { AuthContext } from "../../../Context/AuthProvider";
 const OrderModal = ({ item, setHandleShop }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const { resale, description,_id } = item;
+  const { resale, description, _id,img } = item;
   const handleBooking = (e) => {
     e.preventDefault();
     const phone = e.target.phone.value;
     const location = e.target.location.value;
+    const date = format(new Date(), "dd/MM/yyyy");
     const booking = {
       customer: user?.displayName,
       email: user?.email,
@@ -20,12 +22,14 @@ const OrderModal = ({ item, setHandleShop }) => {
       product: description.name,
       price: resale,
       meet: location,
+      date:date,
+      img:img
     };
     bookingOrder(booking).then((data) => {
       if (data.acknowledged) {
         toast.success(`${description.name} item booked`);
         setHandleShop(null);
-        soldProduct(_id).then(data=>console.log(data))
+        soldProduct(_id).then((data) => console.log(data));
         navigate("/dashboard/myOrders");
       }
     });
@@ -46,8 +50,8 @@ const OrderModal = ({ item, setHandleShop }) => {
                   className="input input-bordered w-full text-sm input-sm "
                 />
               </div>
-            <div className="flex justify-center">
-            <div className="form-control  mx-auto mb-2">
+
+              <div className="form-control  w-11/12 mx-auto mb-2">
                 <input
                   type="email"
                   disabled
@@ -56,7 +60,7 @@ const OrderModal = ({ item, setHandleShop }) => {
                   className="input input-bordered w-full text-sm input-sm "
                 />
               </div>
-              <div className="form-control mx-auto mb-2">
+              <div className="form-control w-11/12 mx-auto mb-2 ">
                 <input
                   type="text"
                   disabled
@@ -65,7 +69,6 @@ const OrderModal = ({ item, setHandleShop }) => {
                   className="input input-bordered w-full text-sm input-sm "
                 />
               </div>
-            </div>
               <div className="form-control w-11/12 mx-auto mb-2">
                 <input
                   type="text"
@@ -127,7 +130,9 @@ const OrderModal = ({ item, setHandleShop }) => {
                   </div>
                   <div className="form-control w-full">
                     <label className="label m-0">
-                      <span className="label-text text-xs">Metting Location</span>
+                      <span className="label-text text-xs">
+                        Metting Location
+                      </span>
                     </label>
                     <input
                       type="text"
@@ -143,7 +148,12 @@ const OrderModal = ({ item, setHandleShop }) => {
                 <label htmlFor="order-modal" className="btn btn-sm btn-warning">
                   Cancel
                 </label>
-                <button disabled={item.status} className="btn btn-sm btn-success ml-3">Booking</button>
+                <button
+                  disabled={item.status}
+                  className="btn btn-sm btn-success ml-3"
+                >
+                  Booking
+                </button>
               </div>
             </form>
           </div>

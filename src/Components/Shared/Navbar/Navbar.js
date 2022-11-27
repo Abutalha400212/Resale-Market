@@ -2,11 +2,10 @@ import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { Link,NavLink, useNavigate } from "react-router-dom";
-import { allItem } from "../../../Api/CategoryApi";
 import { AuthContext } from "../../../Context/AuthProvider";
 const Navbar = () => {
     const navigate = useNavigate()
-    const {user,logOut}= useContext(AuthContext)
+    const {user,logOut,advertise}= useContext(AuthContext)
     const handleLogOut =()=>{
         logOut().then(()=>{
             toast.success('Account LogOut')
@@ -54,7 +53,7 @@ const Navbar = () => {
         <span className=' font-medium'>Dashboard</span>
       </NavLink>
             </li>
-     <li>
+     <li hidden={advertise.length}>
                <NavLink
       to='/advertise'
         className={({ isActive }) =>

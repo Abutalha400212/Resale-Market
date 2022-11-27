@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { userCollection } from "../../Api/UserCollection";
 import toast from "react-hot-toast";
@@ -9,9 +9,16 @@ import { FaGoogle } from "react-icons/fa";
 import useToken from "../../hooks/useToken";
 const Signup = () => {
   const { createUser, updateUser, googleLogin } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const [checkEmail, setCheckEmail] = useState("");
-  const [token] = useToken(checkEmail)
+  const [token] = useToken(checkEmail);
   const { register, handleSubmit } = useForm();
+  if (token) {
+    navigate(from, { replace: true });
+  }
+
   const handleSignup = (data) => {
     const image = data.file[0];
     const formData = new FormData();
@@ -21,17 +28,17 @@ const Signup = () => {
         name: data.name,
         email: data.email,
         account: data.accountType,
-        img: Imgdata.data.display_url
+        img: Imgdata.data.display_url,
       };
       console.log(user, Imgdata);
       createUser(data.email, data.password)
         .then((result) => {
-          setCheckEmail(result.user.email);
           updateUser(data.name, Imgdata.data.display_url)
             .then(() => {
               userCollection(user).then((usedata) => {
                 if (usedata.acknowledged) {
                   toast.success(`${data.accountType} Account Created`);
+                  setCheckEmail(result.user.email);
                 }
               });
             })
@@ -44,15 +51,16 @@ const Signup = () => {
   const handleGoogleLogin = () => {
     googleLogin().then((result) => {
       const user = result.user;
-      setCheckEmail(user.email)
+
       const userData = {
         name: user.displayName,
         img: user.photoURL,
         email: user.email,
-        account: "user"
+        account: "user",
       };
       userCollection(userData).then((data) => {
         if (data.acknowledged) {
+          setCheckEmail(user.email);
           toast.success("Google Login Successfully");
         }
       });

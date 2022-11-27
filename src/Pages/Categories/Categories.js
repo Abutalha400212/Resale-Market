@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { category, categoryItem } from "../../Api/CategoryApi";
+import { AuthContext } from "../../Context/AuthProvider";
 import Card from "./Card/Card";
 import OrderModal from "./OrderDetails/OrderModal";
 
 const Categories = () => { 
+  const {loading,setLoading} = useContext(AuthContext)
   const [handleShop,setHandleShop] = useState(null)
   const [categoriesItem, setCategoriesItem] = useState([]);
   const [categories, setCategories] = useState([]);
- 
-
+if(loading){
+  return <progress className="progress w-56"></progress>
+}
   category().then((data) => {
     setCategories(data)});
   const handleCategoryData = (item) => {
-    categoryItem(item).then((data) => setCategoriesItem(data));
+    categoryItem(item).then((data) =>{
+      setCategoriesItem(data)
+       setLoading(false)
+    });
   };
 
   return (
@@ -22,8 +28,8 @@ const Categories = () => {
           Category Item{" "}
         </h1>
         <ul className="menu menu-compact dropdown-content gap-3 mt-3 p-2 shadow bg-transparent rounded-box md:w-52">
-          {categories.map((category) => (
-                    <li>
+          {categories.length && categories.map((category,i) => (
+                    <li key={i}>
                     <button
            onClick={() => handleCategoryData(category)}
              className={({ isActive }) =>
@@ -57,11 +63,11 @@ const Categories = () => {
         <hr className="mb-2" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {categoriesItem.map((item) => (
-            <Card item={item} setHandleShop={setHandleShop} />
+            <Card key={item._id} item={item} setHandleShop={setHandleShop} />
           ))}
         </div>
       </div>
-      { handleShop &&<OrderModal item={handleShop} setHandleShop={setHandleShop}/>}
+      {( handleShop) && <OrderModal item={handleShop} setHandleShop={setHandleShop}/>}
     </div>
   );
 };

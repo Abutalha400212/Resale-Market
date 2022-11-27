@@ -1,11 +1,13 @@
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+
 import { useLoaderData } from 'react-router-dom';
 import OrderConfirm from './OrderConfirm';
-const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_CODE}`);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_SECRET);
 const Payment = () => {
     const data = useLoaderData()
+    console.log(data);
     return (
         <div>
         <h1 className='text-xl font-mono'>{data.product}</h1>
