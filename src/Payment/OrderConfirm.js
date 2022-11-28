@@ -84,7 +84,7 @@ const OrderConfirm = ({ data }) => {
   };
   return (
     <>
-      <form onSubmit={handlePayment}>
+      <form className="" onSubmit={handlePayment}>
         <CardElement
           options={{
             style: {

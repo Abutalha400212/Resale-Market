@@ -5,7 +5,7 @@ import { Link,NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 const Navbar = () => {
     const navigate = useNavigate()
-    const {user,logOut,advertise}= useContext(AuthContext)
+    const {user,logOut}= useContext(AuthContext)
     const handleLogOut =()=>{
         logOut().then(()=>{
             toast.success('Account LogOut')
@@ -51,19 +51,6 @@ const Navbar = () => {
       >
     
         <span className=' font-medium'>Dashboard</span>
-      </NavLink>
-            </li>
-     <li hidden={advertise.length}>
-               <NavLink
-      to='/advertise'
-        className={({ isActive }) =>
-          `flex items-center px-4 m-0.5 rounded-md transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
-            isActive ? 'bg-gray-300  text-gray-700' : 'bg-gray-100'
-          }`
-        }
-      >
-    
-        <span className=' font-medium'>Advertise</span>
       </NavLink>
             </li>
      <li>

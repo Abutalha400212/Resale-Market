@@ -9,12 +9,12 @@ const Payment = () => {
     const data = useLoaderData()
     console.log(data);
     return (
-        <div>
-        <h1 className='text-xl font-mono'>{data.product}</h1>
-        <p className='text-sm font-semibold'>
+        <div className='w-1/2 mx-auto h-1/2 my-auto mt-10'>
+        <h1 className='text-xl font-mono text-center'>{data.product}</h1>
+        <p className='text-sm font-semibold text-center'>
           Please Pay <strong>${data.price}</strong> for your Order
         </p>
-        <div className="w-96 my-12">
+        <div className="md:w-96 my-12 ">
           <Elements stripe={stripePromise}>
             <OrderConfirm data={data} />
           </Elements>

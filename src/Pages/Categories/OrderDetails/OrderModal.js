@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
 import { bookingOrder } from "../../../Api/OrderBooking";
 import { soldProduct } from "../../../Api/UserCollection";
 import { AuthContext } from "../../../Context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const OrderModal = ({ item, setHandleShop }) => {
   const navigate = useNavigate();

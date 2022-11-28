@@ -1,6 +1,7 @@
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import Categories from "../Pages/Categories/Categories";
+import OrderModal from "../Pages/Categories/OrderDetails/OrderModal";
 import AddAProduct from "../Pages/Dashboard/AddAProduct/AddAProduct";
 import AllSeller from "../Pages/Dashboard/AllSeller/AllSeller";
 import AllUsers from "../Pages/Dashboard/AllUser/AllUsers";

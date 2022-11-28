@@ -3,7 +3,7 @@ import { category, categoryItem } from "../../Api/CategoryApi";
 import { AuthContext } from "../../Context/AuthProvider";
 import Card from "./Card/Card";
 import OrderModal from "./OrderDetails/OrderModal";
-
+import PrivateRoute from '../../Routes/PrivateRoute'
 const Categories = () => { 
   const {loading,setLoading} = useContext(AuthContext)
   const [handleShop,setHandleShop] = useState(null)
@@ -29,7 +29,7 @@ if(loading){
         </h1>
         <ul className="menu menu-compact dropdown-content gap-3 mt-3 p-2 shadow bg-transparent rounded-box md:w-52">
           {categories.length && categories.map((category,i) => (
-                    <li key={i}>
+                    <li key={category._id}>
                     <button
            onClick={() => handleCategoryData(category)}
              className={({ isActive }) =>
@@ -67,7 +67,7 @@ if(loading){
           ))}
         </div>
       </div>
-      {( handleShop) && <OrderModal item={handleShop} setHandleShop={setHandleShop}/>}
+      {( handleShop) &&<PrivateRoute> <OrderModal item={handleShop} setHandleShop={setHandleShop}/></PrivateRoute>}
     </div>
   );
 };

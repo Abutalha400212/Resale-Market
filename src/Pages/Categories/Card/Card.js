@@ -1,13 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Card.css";
 import { HeartIcon, ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import useVerified from "../../../hooks/useVerified";
 import verifyImg from "../../../assest/Image/verified.png";
+import { advertiseCollect } from "../../../Api/AdvertiseCollection";
+import toast from "react-hot-toast";
+import { AuthContext } from "../../../Context/AuthProvider";
 const Card = ({ item, setHandleShop }) => {
+  const { user } = useContext(AuthContext);
   const [verify] = useVerified(item.email);
   const { brand, seller, posted, original, resale, used, img, location } = item;
   const [wisthList, setWishlist] = useState(false);
+  const handleAddToAdvertise = (item) => {
+    delete item._id;
+    delete item.email
+    item = {...item,email:user?.email}
+    item = { ...item, userEmail: user?.email };
+    advertiseCollect(item).then(data =>{
+      if(data.acknowledged){
+        toast.success(`${item.description.name} item is added to Advertise in Home`)
+      }
+      else{
+        toast.error(data.message)
+      }
+    })
+  };
+
   return (
     <div className="drop-shadow-xl rounded-md">
       <div className=" bg-white shadow rounded">
@@ -31,6 +50,12 @@ const Card = ({ item, setHandleShop }) => {
               </span>
             )}
           </div>
+          <button
+            onClick={() => handleAddToAdvertise(item)}
+            className="uppercase text-xs bg-green-50 p-0.5 border-green-500 border rounded text-green-700 font-medium select-none"
+          >
+            Add to Advertise
+          </button>
         </div>
         <div className="p-4 flex flex-col items-center">
           <p className="text-gray-900 font-mono text-sm text-center flex justify-center items-center">

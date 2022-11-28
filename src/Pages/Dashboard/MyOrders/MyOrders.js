@@ -2,29 +2,27 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext} from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { advertiseCollect } from "../../../Api/AdvertiseCollection";
+import { deleteBookingItem } from "../../../Api/OrderBooking";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 const MyOrders = () => {
   const { user} = useContext(AuthContext);
-  const { data: products=[], isLoading } = useQuery({
+  const { data: products=[], isLoading,refetch } = useQuery({
     queryKey: ["booking", user?.email],
     queryFn: () =>
       fetch(`http://localhost:5000/booking?email=${user?.email}`).then((res) =>
         res.json()
       ),
   });
-  const handleAdvertise = (product) => {
-   delete product._id
-   advertiseCollect(product).then(data =>{
-if(data.success){
-toast.success('Your Product is an Advertised now')
-}
-else{
-  toast.error(data.message)
-}
-   })
-  };
+  const handleDelete = (product) => {
+    deleteBookingItem(product._id).then(data =>{
+      if(data.acknowledged){
+        toast.error(`${product.product} Booking Item Deleted Successfully`)
+refetch()
+      }
+    })
+  }
+
 
   if (isLoading) {
     return <progress className="progress w-56"></progress>;
@@ -38,10 +36,10 @@ else{
               Q.
             </th>
             <th scope="col" className="py-2">
-              Name
+              Product Img
             </th>
             <th scope="col" className="py-2">
-              Phone
+              Name
             </th>
             <th scope="col" className="py-2">
               Product Name
@@ -67,7 +65,13 @@ else{
           {products.map((product, i) => (
             <tr key={i} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <td className="py-2">{i + 1}</td>
-              <td className="py-2">{product.customer}</td>
+              <td>
+              <div className="avatar placeholder">
+                  <div className="bg-neutral-focus text-neutral-content rounded-full w-10">
+                    <img src={product?.img} alt="" />
+                  </div>
+                </div>
+              </td>
               <td className="py-2">{product.phone}</td>
               <td className="py-2">{product.product}</td>
               <td className="py-2">{product.price}</td>
@@ -77,16 +81,16 @@ else{
                 <button
                 disabled={product.status}
                   onClick={() => {
-                    handleAdvertise(product);
+                    handleDelete(product);
                   }}
-                  className="btn btn-sm btn-success"
+                  className="btn btn-sm btn-accent"
                 >
-                  Advertise
+                  Delete
                 </button>
               </td>
               <td className="py-2">
                 {product.price && !product.status && <Link to={`/dashboard/payment/${product._id}`}><button className="btn btn-sm btn-primary">Pay</button></Link>}
-             {   product.price && product.status && <span className="text-primary">Paid</span>}
+             {   product.price && product.status && <span className="text-primary ">Paid</span>}
               </td>
             </tr>
           ))}

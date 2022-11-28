@@ -13,15 +13,15 @@ const DashboardLayout = () => {
   const [seller] = useSeller(user.email)
 
   return (
-    <div className="md:flex justify-between mt-10">
-      <div className="w-60 mr-10">
+    <div className="md:flex justify-between mt-10 ">
+      <div className="mr-5">
 {admin ? <AdminForm/> :<>
 {seller ? <SellersForm/> : <UserForm/>}
 </>}
-<Link to='/category' className="flex items-center mt-20 ml-5 underline"><ShoppingBagIcon className="w-6 h-6 font-extrabold mr-1"/>Back To Shop</Link>
-<Link to='/' className="flex items-center mt-5 ml-5 underline"><BuildingStorefrontIcon className="w-6 h-6 font-extrabold mr-1"/>Back To Home</Link>
+<Link to='/category' className="flex items-center mt-20 underline"><ShoppingBagIcon className="w-6 h-6 font-extrabold mr-1"/>Back To Shop</Link>
+<Link to='/' className="flex items-center mt-5 underline"><BuildingStorefrontIcon className="w-6 h-6 font-extrabold mr-1"/>Back To Home</Link>
       </div>
-      <div className="flex-1 ">
+      <div className="flex-1">
         <Outlet />
       </div>
     </div>

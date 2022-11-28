@@ -1,15 +1,17 @@
 import React from 'react';
-import Carousel from '../../../Components/Carousel/Carousel';
-import Navbar from '../../../Components/Shared/Navbar/Navbar';
+import Footer from '../../../Components/Shared/Footer/Footer';
+import Advertise from '../Advertise/Advertise';
+import ShopDesk from '../ShopDesk/ShopDesk';
+import ExtraHome from './ExtraHome/ExtraHome';
 
 const Home = () => {
     return (
-        <div className='relative'>
-            <Carousel/>
-           <div className='absolute z-1 w-full top-0 '>
-           <Navbar/>
-           </div>
-        </div>
+       <div>
+        <ExtraHome/>
+        <ShopDesk/>
+        <Advertise/>
+        <Footer/>
+       </div>
     );
 };
 
