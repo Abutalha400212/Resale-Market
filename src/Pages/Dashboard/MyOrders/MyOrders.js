@@ -79,7 +79,6 @@ refetch()
               <td className="py-2">{product.date}</td>
               <td className="py-2">
                 <button
-                disabled={product.status}
                   onClick={() => {
                     handleDelete(product);
                   }}

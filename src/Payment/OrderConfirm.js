@@ -2,11 +2,12 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { confirmPayment, confirmPaymentUpdate } from "../Api/OrderBooking";
+import { soldProduct } from "../Api/UserCollection";
 
 const OrderConfirm = ({ data }) => {
-  const { price, product, email, _id } = data;
-  const [processign, setProcessing] = useState(false);
+  const { price, product, email, _id, OrderId } = data;
   console.log(data);
+  const [processign, setProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
@@ -22,7 +23,6 @@ const OrderConfirm = ({ data }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setClientSecret(data.clientSecret);
       });
   }, [price]);
@@ -70,14 +70,17 @@ const OrderConfirm = ({ data }) => {
         price,
         transactionId: paymentIntent.id,
         email,
+        product,
       };
       confirmPayment(payment).then((Udata) => {
-        confirmPaymentUpdate(_id).then((data) => {
-          if (data.acknowledged && Udata.acknowledged ) {
-            toast.success(
-              `Your ${product}s bill paid . your transaction Id is ${id}`
-            );
-          }
+        confirmPaymentUpdate(OrderId).then((Gdata) => {
+          soldProduct(_id).then((data) => {
+            if (data.acknowledged && Udata.acknowledged) {
+              toast.success(
+                `Your ${product}s bill paid . your transaction Id is ${id}`
+              );
+            }
+          });
         });
       });
     }

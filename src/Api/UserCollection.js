@@ -64,7 +64,7 @@ export const soldProduct = async (id) => {
       "content-type": "application/json",
       authorization: `bearer ${localStorage.getItem("accessToken")}`,
     },
-    body: JSON.stringify({ status: "Sold" }),
+    body: JSON.stringify({ status: "paid" }),
   });
   const data = await res.json();
   return data;

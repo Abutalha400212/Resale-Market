@@ -2,14 +2,13 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
 import { bookingOrder } from "../../../Api/OrderBooking";
-import { soldProduct } from "../../../Api/UserCollection";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const OrderModal = ({ item, setHandleShop }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const { resale, description, _id,img } = item;
+  const { resale, description,img,Cellphone } = item;
   const handleBooking = (e) => {
     e.preventDefault();
     const phone = e.target.phone.value;
@@ -23,13 +22,13 @@ const OrderModal = ({ item, setHandleShop }) => {
       price: resale,
       meet: location,
       date:date,
-      img:img
+      img:img,
+      Cellphone:Cellphone
     };
     bookingOrder(booking).then((data) => {
       if (data.acknowledged) {
         toast.success(`${description.name} item booked`);
         setHandleShop(null);
-        soldProduct(_id).then((data) => console.log(data));
         navigate("/dashboard/myOrders");
       }
     });

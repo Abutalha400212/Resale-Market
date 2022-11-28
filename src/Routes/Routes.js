@@ -1,5 +1,6 @@
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import DashboardLayout from "../layout/DashboardLayout";
+import Blog from "../Pages/Blog/Blog";
 import Categories from "../Pages/Categories/Categories";
 import OrderModal from "../Pages/Categories/OrderDetails/OrderModal";
 import AddAProduct from "../Pages/Dashboard/AddAProduct/AddAProduct";
@@ -41,7 +42,11 @@ export const router = createBrowserRouter([
       {
         path: "/category",
         element: <Categories />,
-      }
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
     ],
   },
   {

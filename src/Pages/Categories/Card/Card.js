@@ -13,12 +13,9 @@ const Card = ({ item, setHandleShop }) => {
   const { brand, seller, posted, original, resale, used, img, location } = item;
   const [wisthList, setWishlist] = useState(false);
   const handleAddToAdvertise = (item) => {
-    delete item._id;
-    delete item.email
-    item = {...item,email:user?.email}
-    item = { ...item, userEmail: user?.email };
+    item.email = user.email
     advertiseCollect(item).then(data =>{
-      if(data.acknowledged){
+      if(data.success){
         toast.success(`${item.description.name} item is added to Advertise in Home`)
       }
       else{
