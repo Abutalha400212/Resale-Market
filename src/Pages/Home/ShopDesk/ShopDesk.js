@@ -1,14 +1,15 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
+import img1 from '../../../assest/Image/Android.jpg'
 const ShopDesk = () => {
     return (
         <div className="hero min-h-screen bg-base-200 mt-20">
-        <div className="hero-content flex-col lg:flex-row">
-          <img src="https://placeimg.com/260/400/arch" className="max-w-sm rounded-lg shadow-2xl" alt='' />
-          <div>
-            <h1 className="text-5xl font-bold">Box Office News!</h1>
-            <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-            <button className="btn btn-primary">Get Started</button>
+        <div className="hero-content flex-col lg:flex-row ">
+          <img src={img1} className="rounded-lg shadow-2xl" alt='' />
+          <div className='w-1/2'>
+            <h1 className="text-5xl font-bold">Reseller Market</h1>
+            <p className="py-6">The market consisting of wholesalers and retailers who buy products for resale purposes.</p>
+           <Link to={'/category'}> <button className="btn btn-primary">Shop Now</button></Link>
           </div>
         </div>
       </div>

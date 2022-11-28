@@ -7,6 +7,7 @@ import verifyImg from "../../../assest/Image/verified.png";
 import { advertiseCollect } from "../../../Api/AdvertiseCollection";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../Context/AuthProvider";
+import { postwisthList } from "../../../Api/WishlistCollection";
 const Card = ({ item, setHandleShop }) => {
   const { user } = useContext(AuthContext);
   const [verify] = useVerified(item.email);
@@ -23,7 +24,17 @@ const Card = ({ item, setHandleShop }) => {
       }
     })
   };
-
+const handleWishlist=item =>{
+  item.email = user.email
+  postwisthList(item).then(data=>{
+    if(data.success){
+      toast.success(`${item.description.name} item is added to wishlist`)
+    }
+    else{
+      toast.error(data.message)
+    }
+  })
+}
   return (
     <div className="drop-shadow-xl rounded-md">
       <div className=" bg-white shadow rounded">
@@ -94,7 +105,9 @@ const Card = ({ item, setHandleShop }) => {
             Used For: {used}
           </p>
           <Link
-            onClick={() => setWishlist(!wisthList)}
+            onClick={() => {
+              handleWishlist(item)
+              setWishlist(!wisthList)}}
             className="inline-flex mt-1 text-sm text-light text-gray-600 hover:underline"
           >
             Add to Wishlist{" "}

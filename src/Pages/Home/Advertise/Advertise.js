@@ -15,7 +15,8 @@ const Advertise = () => {
     },
   });
   return (
-    <div>
+    <>
+    {(advertised.length >0) && <div>
       <h1 className="text-2xl text-gray-700 underline py-5 font-mono text-center">
         Advertise Section:
       </h1>
@@ -25,7 +26,8 @@ const Advertise = () => {
         ))}
       </div>
       {handleShop && <PrivateRoute><OrderModal item={handleShop} setHandleShop={setHandleShop}/></PrivateRoute>}
-    </div>
+    </div>}
+    </>
   );
 };
 

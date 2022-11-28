@@ -2,12 +2,13 @@ import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import Blog from "../Pages/Blog/Blog";
 import Categories from "../Pages/Categories/Categories";
-import OrderModal from "../Pages/Categories/OrderDetails/OrderModal";
 import AddAProduct from "../Pages/Dashboard/AddAProduct/AddAProduct";
 import AllSeller from "../Pages/Dashboard/AllSeller/AllSeller";
 import AllUsers from "../Pages/Dashboard/AllUser/AllUsers";
 import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
+import Reported from "../Pages/Dashboard/Reported/Reported";
+import Wishlist from "../Pages/Dashboard/WishList/Wishlist";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import Payment from "../Payment/Payment";
@@ -41,7 +42,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/category",
-        element: <PrivateRoute><Categories /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <Categories />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/blog",
@@ -51,59 +56,45 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: (
-  
-        <DashboardLayout />
-      
-    ),
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
     children: [
       {
         path: "/dashboard/allUsers",
-        element: (
-        
-            <AllUsers />
-         
-        ),
+        element: <AllUsers />,
       },
       {
         path: "/dashboard/allSellers",
-        element: (
-     
-            <AllSeller />
-      
-        ),
+        element: <AllSeller />,
       },
       {
         path: "/dashboard/addProduct",
-        element: (
-    
-            <AddAProduct />
-   
-        ),
+        element: <AddAProduct />,
       },
       {
         path: "/dashboard/myProducts",
-        element: (
-         
-            <MyProducts />
-      
-        ),
+        element: <MyProducts />,
       },
       {
         path: "/dashboard/myOrders",
-        element: (
-    
-            <MyOrders />
-         
-        ),
+        element: <MyOrders />,
+      },
+      {
+        path: "/dashboard/wishlist",
+        element: <UserRoute><Wishlist /></UserRoute>,
+      },
+      {
+        path: "/dashboard/myOrders",
+        element: <MyOrders />,
+      },
+      {
+        path: "/dashboard/report",
+        element: <Reported />,
       },
       {
         path: "/dashboard/payment/:id",
-        loader: ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`),
-        element: (
-
-            <Payment />
-        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/booking/${params.id}`),
+        element: <Payment />,
       },
     ],
   },

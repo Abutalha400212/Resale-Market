@@ -7,6 +7,7 @@ import {
   confirmPaymentUpdateTwo,
 } from "../Api/OrderBooking";
 import { soldProduct } from "../Api/UserCollection";
+import { updateWishlist } from "../Api/WishlistCollection";
 
 const OrderConfirm = ({ data }) => {
   const { price, product, email, _id, Cellphone } = data;
@@ -80,11 +81,14 @@ const OrderConfirm = ({ data }) => {
         confirmPaymentUpdateOne(Cellphone).then((data) => {
           soldProduct(_id).then((data) => {
             confirmPaymentUpdateTwo(Cellphone).then((data) => {
-              if (data.acknowledged) {
+              updateWishlist(Cellphone).then(data=>{
+                if (data.acknowledged) {
                 toast.success(
                   `Your ${product}s bill paid . your transaction Id is ${id}`
                 );
               }
+              })
+              
             });
           });
         });
