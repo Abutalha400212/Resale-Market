@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const OrderModal = ({ item, setHandleShop }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const { resale, description,img,Cellphone } = item;
+  const { resale, description,img,Cellphone,condition } = item;
   const handleBooking = (e) => {
     e.preventDefault();
     const phone = e.target.phone.value;
@@ -109,6 +109,10 @@ const OrderModal = ({ item, setHandleShop }) => {
                   <li className="py-2 px-2 w-full rounded-b-lg">
                     {" "}
                     ram: {description.ram}
+                  </li>
+                  <li className="py-2 px-2 w-full rounded-b-lg">
+                    {" "}
+                    Condition: {condition}
                   </li>
                 </ul>
                 <div>
