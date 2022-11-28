@@ -1,11 +1,15 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { confirmPayment, confirmPaymentUpdate } from "../Api/OrderBooking";
+import {
+  confirmPayment,
+  confirmPaymentUpdateOne,
+  confirmPaymentUpdateTwo,
+} from "../Api/OrderBooking";
 import { soldProduct } from "../Api/UserCollection";
 
 const OrderConfirm = ({ data }) => {
-  const { price, product, email, _id, OrderId } = data;
+  const { price, product, email, _id, Cellphone } = data;
   console.log(data);
   const [processign, setProcessing] = useState(false);
   const stripe = useStripe();
@@ -72,14 +76,16 @@ const OrderConfirm = ({ data }) => {
         email,
         product,
       };
-      confirmPayment(payment).then((Udata) => {
-        confirmPaymentUpdate(OrderId).then((Gdata) => {
+      confirmPayment(payment).then((data) => {
+        confirmPaymentUpdateOne(Cellphone).then((data) => {
           soldProduct(_id).then((data) => {
-            if (data.acknowledged && Udata.acknowledged) {
-              toast.success(
-                `Your ${product}s bill paid . your transaction Id is ${id}`
-              );
-            }
+            confirmPaymentUpdateTwo(Cellphone).then((data) => {
+              if (data.acknowledged) {
+                toast.success(
+                  `Your ${product}s bill paid . your transaction Id is ${id}`
+                );
+              }
+            });
           });
         });
       });

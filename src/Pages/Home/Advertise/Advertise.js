@@ -1,25 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../../../Context/AuthProvider";
+import React, { useState } from "react";
+import PrivateRoute from "../../../Routes/PrivateRoute";
 import AdvertiseCard from "../../Categories/Card/AdvertiseCard";
 import OrderModal from '../../Categories/OrderDetails/OrderModal'
 const Advertise = () => {
   const [handleShop, setHandleShop] = useState(null);
-  const { user } = useContext(AuthContext);
-  const url = `http://localhost:5000/advertise?email=${user?.email}`;
-  const { data: advertised = [] } = useQuery({
-    queryKey: ["advertise", user?.email],
+  const url = `http://localhost:5000/advertise`;
+  const { data: advertised=[] } = useQuery({
+    queryKey: ["advertise"],
     queryFn: async () => {
-      const res = await fetch(url, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
+      const res = await fetch(url);
       const data = await res.json();
       return data;
     },
   });
-
   return (
     <div>
       <h1 className="text-2xl text-gray-700 underline py-5 font-mono text-center">
@@ -30,7 +24,7 @@ const Advertise = () => {
           <AdvertiseCard key={item._id} item={item} setHandleShop={setHandleShop} />
         ))}
       </div>
-      {handleShop && <OrderModal item={handleShop} setHandleShop={setHandleShop}/>}
+      {handleShop && <PrivateRoute><OrderModal item={handleShop} setHandleShop={setHandleShop}/></PrivateRoute>}
     </div>
   );
 };

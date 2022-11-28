@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/category",
-        element: <Categories />,
+        element: <PrivateRoute><Categories /></PrivateRoute>,
       },
       {
         path: "/blog",
@@ -52,58 +52,57 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: (
-      <PrivateRoute>
+  
         <DashboardLayout />
-      </PrivateRoute>
+      
     ),
     children: [
       {
         path: "/dashboard/allUsers",
         element: (
-          <AdminRoute>
+        
             <AllUsers />
-          </AdminRoute>
+         
         ),
       },
       {
         path: "/dashboard/allSellers",
         element: (
-          <AdminRoute>
+     
             <AllSeller />
-          </AdminRoute>
+      
         ),
       },
       {
         path: "/dashboard/addProduct",
         element: (
-          <SellerRoute>
+    
             <AddAProduct />
-          </SellerRoute>
+   
         ),
       },
       {
         path: "/dashboard/myProducts",
         element: (
-          <SellerRoute>
+         
             <MyProducts />
-          </SellerRoute>
+      
         ),
       },
       {
         path: "/dashboard/myOrders",
         element: (
-          <UserRoute>
+    
             <MyOrders />
-          </UserRoute>
+         
         ),
       },
       {
         path: "/dashboard/payment/:id",
         loader: ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`),
         element: (
-          <UserRoute>
+
             <Payment />
-          </UserRoute>
         ),
       },
     ],

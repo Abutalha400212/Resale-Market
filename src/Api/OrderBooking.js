@@ -23,8 +23,20 @@ export const confirmPayment = async (payment) => {
   const data = await res.json();
   return data;
 };
-export const confirmPaymentUpdate = async (id) => {
-  const res = await fetch(`http://localhost:5000/orders/${id}`, {
+export const confirmPaymentUpdateOne = async (phone) => {
+  const res = await fetch(`http://localhost:5000/ordersOne/${phone}`, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("accessToken")}`,
+    },
+    body: JSON.stringify({status:"sold"}),
+  });
+  const data = await res.json();
+  return data;
+};
+export const confirmPaymentUpdateTwo = async (phone) => {
+  const res = await fetch(`http://localhost:5000/ordersTwo/${phone}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

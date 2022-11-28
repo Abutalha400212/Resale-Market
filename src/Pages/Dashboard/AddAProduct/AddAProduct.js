@@ -23,7 +23,7 @@ const AddAProduct = () => {
         seller: user?.displayName,
         email: user.email,
         posted: date,
-        phone:data.phone,
+        Cellphone:data.phone,
         original: data.newPrice,
         resale: data.resalePrice,
         used: data.usingTime,

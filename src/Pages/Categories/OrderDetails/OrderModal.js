@@ -63,7 +63,7 @@ const OrderModal = ({ item, setHandleShop }) => {
                 <input
                   type="text"
                   disabled
-                  defaultValue={item?.phone}
+                  defaultValue={item?.Cellphone}
                   placeholder="Type here"
                   className="input input-bordered w-full text-sm input-sm "
                 />
