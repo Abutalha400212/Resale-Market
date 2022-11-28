@@ -1,0 +1,83 @@
+[{
+  "_id": "6384be7828b5746b3455fe35",
+  "brand": "SAMSUNG",
+  "seller": "Sumaya",
+  "email": "abutalha141999@gmail.com",
+  "posted": "28/11/2022",
+  "Cellphone": "019874566723",
+  "original": "11000",
+  "resale": "8700",
+  "used": "1 year",
+  "features": "ram,camera,earphone",
+  "img": "https://i.ibb.co/0XH98vm/sam-j5.jpg",
+  "location": "Khulna",
+  "description": {
+    "name": "J-5",
+    "made": "South Korea",
+    "display": "2.4 inch 300*600 px",
+    "ram": "5GB",
+    "camera": "12MP 10MP"
+  },
+  "status": "sold"
+},{
+  "_id": "6384bfd628b5746b3455fe39",
+  "brand": "SYMPHONY",
+  "seller": "Mominul",
+  "email": "abutalha141999@gmail.com",
+  "posted": "28/11/2022",
+  "Cellphone": "01345679809",
+  "original": "4500",
+  "resale": "2000",
+  "used": "3 year",
+  "features": "ram,camera,earphone",
+  "img": "https://i.ibb.co/qjQmkrt/sym-w-60.jpg",
+  "location": "Khustia",
+  "description": {
+    "name": "W-60",
+    "made": "India",
+    "display": "2.4 inch 300*600 px",
+    "ram": "2GB",
+    "camera": "5MP 10MP"
+  }
+},{
+  "_id": "6384c0ac28b5746b3455fe3b",
+  "brand": "REDMI",
+  "seller": "Samsunnahar",
+  "email": "abutalha141999@gmail.com",
+  "posted": "28/11/2022",
+  "Cellphone": "01956234589",
+  "original": "12000",
+  "resale": "8700",
+  "used": "1 year",
+  "features": "ram,camera,earphone",
+  "img": "https://i.ibb.co/8NBGGwX/redmi.jpg",
+  "location": "mirpur-10,Dhaka",
+  "description": {
+    "name": "Note-11",
+    "made": "India",
+    "display": "2.4 inch 300*600 px",
+    "ram": "5GB",
+    "camera": "12MP 10MP"
+  },
+  "status": "sold"
+},{
+  "_id": "6384c18f28b5746b3455fe3d",
+  "brand": "SAMSUNG",
+  "seller": "musad",
+  "email": "abutalha141999@gmail.com",
+  "posted": "28/11/2022",
+  "Cellphone": "01987465362",
+  "original": "4500",
+  "resale": "3200",
+  "used": "6 month",
+  "features": "ram,camera,earphone",
+  "img": "https://i.ibb.co/S6vvv86/sam-j2.jpg",
+  "location": "mirpur-10,Dhaka",
+  "description": {
+    "name": "J-2",
+    "made": "South Korea",
+    "display": "2.4 inch 100*200 px",
+    "ram": "2GB",
+    "camera": "5MP 10MP"
+  }
+}]

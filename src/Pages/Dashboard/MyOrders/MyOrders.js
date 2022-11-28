@@ -10,7 +10,11 @@ const MyOrders = () => {
   const { data: products=[], isLoading,refetch } = useQuery({
     queryKey: ["booking", user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/booking?email=${user?.email}`).then((res) =>
+      fetch(`https://mobile-x-server.vercel.app/booking?email=${user?.email}`,{
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) =>
         res.json()
       ),
   });

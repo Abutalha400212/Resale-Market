@@ -49,7 +49,7 @@ if(loading){
         <div className="mb-2">
           <h1 className="font-bold text-2xl mb-2 text-center text-gray-800 underline ">
             {" "}
-            Phone Fetures
+            Phone Features
           </h1>
           <div className="md:flex justify-between text-gray-400 font-light text-xs">
             <p className="font-serif">

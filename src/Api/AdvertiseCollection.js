@@ -1,9 +1,8 @@
 export const advertiseCollect = async (advertise) => {
-    const res = await fetch(`http://localhost:5000/advertise`, {
+    const res = await fetch(`https://mobile-x-server.vercel.app/advertise`, {
       method: "POST",
       headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        "content-type": "application/json"
       },
       body: JSON.stringify(advertise),
     });

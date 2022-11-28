@@ -5,7 +5,7 @@ import AdvertiseCard from "../../Categories/Card/AdvertiseCard";
 import OrderModal from '../../Categories/OrderDetails/OrderModal'
 const Advertise = () => {
   const [handleShop, setHandleShop] = useState(null);
-  const url = `http://localhost:5000/advertise`;
+  const url = `https://mobile-x-server.vercel.app/advertise`;
   const { data: advertised=[] } = useQuery({
     queryKey: ["advertise"],
     queryFn: async () => {

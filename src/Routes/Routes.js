@@ -60,23 +60,23 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/allUsers",
-        element: <AllUsers />,
+        element: <AdminRoute><AllUsers /></AdminRoute>,
       },
       {
         path: "/dashboard/allSellers",
-        element: <AllSeller />,
+        element: <AdminRoute><AllSeller /></AdminRoute>,
       },
       {
         path: "/dashboard/addProduct",
-        element: <AddAProduct />,
+        element: <SellerRoute><AddAProduct /></SellerRoute>,
       },
       {
         path: "/dashboard/myProducts",
-        element: <MyProducts />,
+        element: <SellerRoute><MyProducts /></SellerRoute>,
       },
       {
         path: "/dashboard/myOrders",
-        element: <MyOrders />,
+        element: <UserRoute><MyOrders /></UserRoute>,
       },
       {
         path: "/dashboard/wishlist",
@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/myOrders",
-        element: <MyOrders />,
+        element:<UserRoute> <MyOrders /></UserRoute>,
       },
       {
         path: "/dashboard/report",
@@ -93,8 +93,8 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/booking/${params.id}`),
-        element: <Payment />,
+          fetch(`https://mobile-x-server.vercel.app/booking/${params.id}`),
+        element: <UserRoute><Payment /></UserRoute>,
       },
     ],
   },

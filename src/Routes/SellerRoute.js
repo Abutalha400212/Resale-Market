@@ -10,7 +10,7 @@ const SellerRoute = ({children}) => {
     if(loading||sellerLoading){
       return <progress className="progress w-56"></progress>
     }
-    if (!user&&!seller) {
+    if (!seller) {
       return <Navigate to={"/login"} state={{ from: location }} replace></Navigate>;
     }
   

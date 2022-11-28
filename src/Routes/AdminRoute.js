@@ -10,7 +10,7 @@ const AdminRoute = ({ children }) => {
   if (loading || adminLoading) {
     return <progress className="progress w-56"></progress>;
   }
-  if (!user && !admin) {
+  if ( !admin) {
     return <Navigate to={"/login"} state={{ from: location }} replace></Navigate>;
   }
 

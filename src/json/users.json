@@ -1,0 +1,49 @@
+[{
+  "_id": {
+    "$oid": "637f93c2c3f680dbee3ee276"
+  },
+  "name": "Abu Talha",
+  "email": "abu@talha.com",
+  "account": "admin",
+  "img": "https://i.ibb.co/6sGDMHn/834a9822-480f-4973-8608-d5efee6bb9a3.jpg"
+},{
+  "_id": {
+    "$oid": "63849556be0ef1b7cd06883a"
+  },
+  "name": "Abu Talha (‫أبو طلحة‬‎)",
+  "img": "https://lh3.googleusercontent.com/a/ALm5wu0dNC0KM50wn8Xy0XnWHpJYw3Uwehlj3hcRSVy-fg=s96-c",
+  "email": "abutalha141999@gmail.com",
+  "account": "user"
+},{
+  "_id": {
+    "$oid": "6384b0fa28b5746b3455fe33"
+  },
+  "name": "Abu Talha (‫أبو طلحة‬‎)",
+  "img": "https://lh3.googleusercontent.com/a/ALm5wu0dNC0KM50wn8Xy0XnWHpJYw3Uwehlj3hcRSVy-fg=s96-c",
+  "email": "abutalha141999@gmail.com",
+  "account": "user"
+},{
+  "_id": {
+    "$oid": "6384b7fc28b5746b3455fe34"
+  },
+  "name": "Sumaya",
+  "email": "sumaya@khatun.com",
+  "account": "seller",
+  "img": "https://i.ibb.co/RSHxNyx/Regulation.jpg"
+},{
+  "_id": {
+    "$oid": "6384c86128b5746b3455fe3f"
+  },
+  "name": "Abu Talha (‫أبو طلحة‬‎)",
+  "img": "https://lh3.googleusercontent.com/a/ALm5wu0dNC0KM50wn8Xy0XnWHpJYw3Uwehlj3hcRSVy-fg=s96-c",
+  "email": "abutalha141999@gmail.com",
+  "account": "user"
+},{
+  "_id": {
+    "$oid": "6384cee791450c3a90663056"
+  },
+  "name": "Abu Talha (‫أبو طلحة‬‎)",
+  "img": "https://lh3.googleusercontent.com/a/ALm5wu0dNC0KM50wn8Xy0XnWHpJYw3Uwehlj3hcRSVy-fg=s96-c",
+  "email": "abutalha141999@gmail.com",
+  "account": "user"
+}]

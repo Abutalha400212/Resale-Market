@@ -135,7 +135,7 @@ const Signup = () => {
               <div className="mb-6">
                 <input
                   type="text"
-                  {...register("name")}
+                  {...register("name",{required:"Enter your Authentic Name"})}
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Your Name"
@@ -144,7 +144,7 @@ const Signup = () => {
               <div className="mb-6">
                 <input
                   type="email"
-                  {...register("email")}
+                  {...register("email",{required:"Email is required"})}
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Email address"
@@ -154,7 +154,7 @@ const Signup = () => {
               <div className="mb-6">
                 <input
                   type="password"
-                  {...register("password")}
+                  {...register("password",{required:"Enter your password"})}
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Password"
@@ -167,7 +167,7 @@ const Signup = () => {
                   </span>
                 </label>
                 <select
-                  {...register("accountType")}
+                  {...register("accountType",{required:"Please Select any one"})}
                   className="select select-bordered"
                 >
                   <option value={"seller"}>Seller</option>
@@ -184,7 +184,7 @@ const Signup = () => {
                   Upload file
                 </label>
                 <input
-                  {...register("file")}
+                  {...register("file",{required:"Drug your Photo"})}
                   type="file"
                   className="file-input w-full"
                 />
