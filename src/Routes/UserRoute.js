@@ -9,11 +9,11 @@ const UserRoute = ({children}) => {
     if(loading||userLoading){
       return <progress className="progress w-56"></progress>
     }
-    if (!users) {
-      return <Navigate to={"/login"} state={{ from: location }} replace></Navigate>;
+    if (user && users) {
+      return children;
     }
   
-    return children;
+    return <Navigate to={"/login"} state={{ from: location }} replace></Navigate>;
   };
 
 export default UserRoute;

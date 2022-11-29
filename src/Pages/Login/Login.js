@@ -5,26 +5,39 @@ import { AuthContext } from "../../Context/AuthProvider";
 import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 import { userCollection } from "../../Api/UserCollection";
+import market from "../../assest/Image/mp.png";
 import useToken from "../../hooks/useToken";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  const { signIn, googleLogin } = useContext(AuthContext);
+  const { signIn, googleLogin, loading } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
   const [checkEmail, setCheckEmail] = useState("");
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [token] = useToken(checkEmail);
   if (token) {
     navigate(from, { replace: true });
   }
+  if (loading) {
+    return <progress className="progress w-56"></progress>;
+  }
   const hanldeLogin = (data) => {
-    signIn(data.email, data.password).then((result) => {
-      setCheckEmail(result.user.email);
-      if (result.user) {
-        toast.success("User Login Successfully");
-      }
-    });
+    signIn(data.email, data.password)
+      .then((result) => {
+        setCheckEmail(result.user.email);
+
+        if (result.user) {
+          toast.success("User Login Successfully");
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
   const handleGoogleLogin = () => {
     googleLogin().then((result) => {
@@ -44,15 +57,11 @@ const Login = () => {
     });
   };
   return (
-    <div className="h-screen">
+    <div className="min-h-screen mt-10">
       <div className="px-6 h-full text-gray-800">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
           <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-              className="w-full"
-              alt=""
-            />
+            <img src={market} className="w-full" alt="" />
           </div>
           <div className="xl:ml-20 w-full xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
             <form onSubmit={handleSubmit(hanldeLogin)}>
@@ -112,21 +121,27 @@ const Login = () => {
               <div className="mb-6">
                 <input
                   type="text"
-                  {...register("email",{required:"Enter Email Address"})}
+                  {...register("email", { required: true })}
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Email address"
                 />
+                {errors.email && (
+                  <span className="text-red-500">Enter valid Email</span>
+                )}
               </div>
 
               <div className="mb-6">
                 <input
                   type="password"
-                  {...register("password",{required:"Enter your password"})}
+                  {...register("password", { required: true })}
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Password"
                 />
+                {errors.password && (
+                  <span className="text-red-500">Enter valid Password</span>
+                )}
               </div>
 
               <div className="flex justify-between items-center mb-6">

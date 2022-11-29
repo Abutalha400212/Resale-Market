@@ -14,6 +14,7 @@ const Card = ({ item, setHandleShop }) => {
   const { brand, seller, posted, original, resale, used, img, location } = item;
   const [wisthList, setWishlist] = useState(false);
   const handleAddToAdvertise = (item) => {
+    delete item._id
     item.email = user.email
     advertiseCollect(item).then(data =>{
       if(data.success){
@@ -25,6 +26,7 @@ const Card = ({ item, setHandleShop }) => {
     })
   };
 const handleWishlist=item =>{
+  delete item._id
   item.email = user.email
   postwisthList(item).then(data=>{
     if(data.success){
@@ -58,7 +60,7 @@ const handleWishlist=item =>{
               </span>
             )}
           </div>
-          <button
+           <button
             onClick={() => handleAddToAdvertise(item)}
             className="uppercase text-xs bg-green-50 p-0.5 border-green-500 border rounded text-green-700 font-medium select-none"
           >
@@ -91,12 +93,12 @@ const handleWishlist=item =>{
           <p className="text-gray-700 font-light text-sm text-center">
             Model: {item.description.name}
           </p>
-          <div className="flex justify-between gap-x-2 text-gray-700  font-light">
+          <div className="flex justify-center text-gray-700  font-light">
             <p className="text-center  mt-1 text-sm">
               Original Price : ৳{" "}
               <span className="line-through font-semibold">{original}</span>
             </p>
-            <p className="text-center  mt-1 text-sm">
+            <p className="text-center  mt-1 text-sm ml-2">
               Resale Price : ৳{" "}
               <span className="font-bold text-blue-900">{resale}</span>
             </p>
@@ -104,7 +106,7 @@ const handleWishlist=item =>{
           <p className="text-gray-500 font-light text-xs text-center">
             Used For: {used}
           </p>
-          <Link
+        <Link
             onClick={() => {
               handleWishlist(item)
               setWishlist(!wisthList)}}

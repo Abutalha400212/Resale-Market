@@ -8,17 +8,19 @@ import { imageUpload } from "../../Api/ImageUploadApi";
 import { FaGoogle } from "react-icons/fa";
 import useToken from "../../hooks/useToken";
 const Signup = () => {
-  const { createUser, updateUser, googleLogin } = useContext(AuthContext);
+  const { createUser, updateUser, googleLogin ,loading } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
   const [checkEmail, setCheckEmail] = useState("");
   const [token] = useToken(checkEmail);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,formState: { errors }} = useForm();
   if (token) {
     navigate(from, { replace: true });
   }
-
+  if(loading){
+    return <progress className="progress w-56"></progress>
+  }
   const handleSignup = (data) => {
     const image = data.file[0];
     const formData = new FormData();
@@ -32,8 +34,10 @@ const Signup = () => {
       };
       console.log(user, Imgdata);
       createUser(data.email, data.password)
+      
         .then((result) => {
           updateUser(data.name, Imgdata.data.display_url)
+      
             .then(() => {
               userCollection(user).then((usedata) => {
                 if (usedata.acknowledged) {
@@ -42,11 +46,11 @@ const Signup = () => {
                 }
               });
             })
-            .catch((err) => console.log(err));
+            .catch((err) =>toast.error(err.message));
         })
-        .catch((err) => console.log(err));
+        .catch((err) =>toast.error(err.message));
     });
-    console.log(data);
+    
   };
   const handleGoogleLogin = () => {
     googleLogin().then((result) => {
@@ -64,10 +68,12 @@ const Signup = () => {
           toast.success("Google Login Successfully");
         }
       });
-    });
+    
+    }).catch(err=>{
+      toast.error(err.message)})
   };
   return (
-    <div className="h-screen">
+    <div className="min-h-screen">
       <div className="px-6 h-full text-gray-800">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
           <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
@@ -135,11 +141,12 @@ const Signup = () => {
               <div className="mb-6">
                 <input
                   type="text"
-                  {...register("name",{required:"Enter your Authentic Name"})}
+                  {...register("name",{required:true})}
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Your Name"
                 />
+                {errors.name && <span className="text-red-500">This field is required</span>}
               </div>
               <div className="mb-6">
                 <input
@@ -149,16 +156,18 @@ const Signup = () => {
                   id="exampleFormControlInput2"
                   placeholder="Email address"
                 />
+                {errors.email && <span className="text-red-500">This field is required</span>}
               </div>
 
               <div className="mb-6">
                 <input
                   type="password"
-                  {...register("password",{required:"Enter your password"})}
+                  {...register("password",{required:"Enter your password",maxLength:"8"})}
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Password"
                 />
+                {errors.password && <span className="text-red-500">Password must be 8 charecter</span>}
               </div>
               <div className="form-control w-full mb-6">
                 <label className="label">
@@ -167,11 +176,11 @@ const Signup = () => {
                   </span>
                 </label>
                 <select
-                  {...register("accountType",{required:"Please Select any one"})}
+                  {...register("accountType")}
                   className="select select-bordered"
                 >
                   <option value={"seller"}>Seller</option>
-                  <option selected value={"user"}>
+                  <option  value={"user"}>
                     user
                   </option>
                 </select>
@@ -188,6 +197,7 @@ const Signup = () => {
                   type="file"
                   className="file-input w-full"
                 />
+                {errors.file && <span className="text-red-500">This field is required</span>}
               </div>
               <div className="text-center lg:text-left">
                 <button

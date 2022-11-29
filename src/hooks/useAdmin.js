@@ -5,7 +5,7 @@ const useAdmin = (email) => {
   const [adminLoading, setAdminLoading] = useState(true);
   useEffect(() => {
    if(email){
-    fetch(`https://mobile-x-server.vercel.app/users/admin/${email}`)
+    fetch(` https://mobile-x-server.vercel.app/users/admin/${email}`)
     .then((res) => res.json())
     .then((data) =>{
       
@@ -13,7 +13,7 @@ const useAdmin = (email) => {
     setAdminLoading(false)
     });
    }
-  }, [email,adminLoading]);
-  return [admin]
+  }, [email]);
+  return [admin,adminLoading]
 };
 export default useAdmin

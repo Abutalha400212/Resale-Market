@@ -4,7 +4,6 @@ import verifyImg from '../../../assest/Image/verified.png'
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 const AdvertiseCard = ({ item,setHandleShop }) => {
   const { brand, seller, posted, original, resale, used, img, location } = item;
-  console.log(item);
   const [verify] = useVerified(item.email);
   return (
     <div className="drop-shadow-xl rounded-md">

@@ -1,4 +1,4 @@
-import { BuildingLibraryIcon, ClipboardDocumentIcon, ShoppingCartIcon } from '@heroicons/react/24/solid';
+import { ClipboardDocumentIcon, ShoppingCartIcon } from '@heroicons/react/24/solid';
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthProvider';

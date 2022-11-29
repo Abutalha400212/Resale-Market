@@ -18,7 +18,7 @@ const OrderConfirm = ({ data }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [cardError, setCardError] = useState("");
   useEffect(() => {
-    fetch("https://mobile-x-server.vercel.app/create-payment-intent", {
+    fetch(" https://mobile-x-server.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",

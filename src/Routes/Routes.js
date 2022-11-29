@@ -42,11 +42,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/category",
-        element: (
-          <PrivateRoute>
-            <Categories />
-          </PrivateRoute>
-        ),
+        element: <Categories />,
       },
       {
         path: "/blog",
@@ -56,35 +52,68 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard/allUsers",
-        element: <AdminRoute><AllUsers /></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/allSellers",
-        element: <AdminRoute><AllSeller /></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AllSeller />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/addProduct",
-        element: <SellerRoute><AddAProduct /></SellerRoute>,
+        element: (
+          <SellerRoute>
+            <AddAProduct />
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/myProducts",
-        element: <SellerRoute><MyProducts /></SellerRoute>,
+        element: (
+          <SellerRoute>
+            <MyProducts />
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/myOrders",
-        element: <UserRoute><MyOrders /></UserRoute>,
+        element: (
+          <UserRoute>
+            <MyOrders />
+          </UserRoute>
+        ),
       },
       {
         path: "/dashboard/wishlist",
-        element: <UserRoute><Wishlist /></UserRoute>,
+        element: (
+          <UserRoute>
+            <Wishlist />
+          </UserRoute>
+        ),
       },
       {
         path: "/dashboard/myOrders",
-        element:<UserRoute> <MyOrders /></UserRoute>,
+        element: (
+          <UserRoute>
+            {" "}
+            <MyOrders />
+          </UserRoute>
+        ),
       },
       {
         path: "/dashboard/report",
@@ -93,8 +122,12 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         loader: ({ params }) =>
-          fetch(`https://mobile-x-server.vercel.app/booking/${params.id}`),
-        element: <UserRoute><Payment /></UserRoute>,
+          fetch(` https://mobile-x-server.vercel.app/booking/${params.id}`),
+        element: (
+          <UserRoute>
+            <Payment />
+          </UserRoute>
+        ),
       },
     ],
   },

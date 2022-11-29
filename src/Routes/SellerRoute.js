@@ -10,11 +10,11 @@ const SellerRoute = ({children}) => {
     if(loading||sellerLoading){
       return <progress className="progress w-56"></progress>
     }
-    if (!seller) {
-      return <Navigate to={"/login"} state={{ from: location }} replace></Navigate>;
+    if (user && seller) {
+      return children;
     }
   
-    return children;
+    return <Navigate to={"/login"} state={{ from: location }} replace></Navigate>
   };
 
 export default SellerRoute;
