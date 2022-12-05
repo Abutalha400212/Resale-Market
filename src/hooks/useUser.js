@@ -5,7 +5,7 @@ const useUser = (email) => {
     const [userLoading,setUserLoading] = useState(true)
     useEffect(() => {
      if(email){
-      fetch(` https://mobile-x-server.vercel.app/users/generalUser/${email}`)
+      fetch(`http://localhost:5000/users/generalUser/${email}`)
       .then((res) => res.json())
       .then((data) =>{
         setUSer(data.isUser)

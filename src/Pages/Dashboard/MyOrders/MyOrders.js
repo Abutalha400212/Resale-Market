@@ -7,10 +7,10 @@ import { AuthContext } from "../../../Context/AuthProvider";
 
 const MyOrders = () => {
   const { user} = useContext(AuthContext);
-  const { data: products=[], isLoading,refetch } = useQuery({
+  const { data: products=[], refetch } = useQuery({
     queryKey: ["booking", user?.email],
     queryFn: () =>
-      fetch(` https://mobile-x-server.vercel.app/booking?email=${user?.email}`,{
+      fetch(`http://localhost:5000/booking?email=${user?.email}`,{
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -28,9 +28,7 @@ refetch()
   }
 
 
-  if (isLoading) {
-    return <progress className="progress w-56"></progress>;
-  }
+
   return (
     <div className="overflow-x-auto mt-10 ">
       <table className="table w-full">
@@ -67,7 +65,7 @@ refetch()
         </thead>
         <tbody className="text-center text-gray-600 font-mono">
           {products.map((product, i) => (
-            <tr key={i} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <tr key={product._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <td className="py-2">{i + 1}</td>
               <td>
               <div className="avatar placeholder">

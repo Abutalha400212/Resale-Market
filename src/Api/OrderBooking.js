@@ -1,5 +1,5 @@
 export const bookingOrder = async (order) => {
-  const res = await fetch(` https://mobile-x-server.vercel.app/booking`, {
+  const res = await fetch(`http://localhost:5000/booking`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -12,7 +12,7 @@ export const bookingOrder = async (order) => {
 };
 
 export const confirmPayment = async (payment) => {
-  const res = await fetch(` https://mobile-x-server.vercel.app/payments`, {
+  const res = await fetch(`http://localhost:5000/payments`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -24,7 +24,7 @@ export const confirmPayment = async (payment) => {
   return data;
 };
 export const confirmPaymentUpdateOne = async (phone) => {
-  const res = await fetch(` https://mobile-x-server.vercel.app/ordersOne/${phone}`, {
+  const res = await fetch(`http://localhost:5000/ordersOne/${phone}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",
@@ -36,7 +36,7 @@ export const confirmPaymentUpdateOne = async (phone) => {
   return data;
 };
 export const confirmPaymentUpdateTwo = async (phone) => {
-  const res = await fetch(` https://mobile-x-server.vercel.app/ordersTwo/${phone}`, {
+  const res = await fetch(`http://localhost:5000/ordersTwo/${phone}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",
@@ -49,7 +49,7 @@ export const confirmPaymentUpdateTwo = async (phone) => {
 };
 
 export const deleteBookingItem = async (id) => {
-  const res = await fetch(` https://mobile-x-server.vercel.app/orders/${id}`, {
+  const res = await fetch(`http://localhost:5000/orders/${id}`, {
     method: "DELETE",
     headers: {
       authorization: `bearer ${localStorage.getItem("accessToken")}`,
