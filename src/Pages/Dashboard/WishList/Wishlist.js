@@ -1,26 +1,30 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState,useEffect } from "react";
 import { getWishlist } from "../../../Api/WishlistCollection";
+import Loader from "../../../Components/Loader/Loader";
 import { AuthContext } from "../../../Context/AuthProvider";
 import OrderModal from "../../Categories/OrderDetails/OrderModal";
 import WishListCard from "./WishListCard";
 
 const Wishlist = () => {
-  const [loading, setLoading] = useState(true);
+  const { user,loading, setLoading} = useContext(AuthContext);
   const [handleShop, setHandleShop] = useState(null);
-  const { user } = useContext(AuthContext);
   const [wishListItem, setWishListItem] = useState([]);
+
+ useEffect(()=>{
   getWishlist(user.email).then((data) => {
-    setLoading(true);
     setWishListItem(data);
     setLoading(false);
-    console.log(data);
   });
+ },[loading,setLoading,user?.email])
+
+ if(loading){
+  return <Loader/>
+ }
+
+
   return (
-    <>
-      {wishListItem.length ? (
         <div>
-          <div className="flex flex-wrap gap-6 mt-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
             {wishListItem.map((item) => (
               <WishListCard
                 key={item._id}
@@ -33,22 +37,6 @@ const Wishlist = () => {
             <OrderModal item={handleShop} setHandleShop={setHandleShop} />
           )}
         </div>
-      ) : (
-        <>
-          {" "}
-          <h1 className="text-3xl text-center uppercase">
-            {" "}
-            Items are not available.{" "}
-          </h1>
-          <p className="text-sm text-center">
-            Please Select one{" "}
-            <Link className="underline" to="/category">
-              Shop
-            </Link>
-          </p>
-        </>
-      )}
-    </>
   );
 };
 

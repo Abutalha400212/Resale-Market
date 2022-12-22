@@ -4,31 +4,37 @@ import { AuthContext } from "../../Context/AuthProvider";
 import Card from "./Card/Card";
 import OrderModal from "./OrderDetails/OrderModal";
 import PrivateRoute from "../../Routes/PrivateRoute";
+import Loader from '../../Components/Loader/Loader'
+import { useEffect } from "react";
 const Categories = () => {
-  const { loading } = useContext(AuthContext);
+  const { loading,setLoading } = useContext(AuthContext);
   const [handleShop, setHandleShop] = useState(null);
   const [categoriesItem, setCategoriesItem] = useState([]);
   const [categories, setCategories] = useState([]);
 
-
+useEffect(()=>{
   category().then((data) => {
     setCategories(data);
+    setLoading(false)
   });
+},[loading,setLoading])
+ 
   const handleCategoryData = (item) => {
     categoryItem(item).then((data) => {
+      setLoading(false)
       setCategoriesItem(data);
     });
   };
   if (loading) {
-    return <progress className="progress w-56"></progress>;
+    return <Loader/>
   }
   return (
-    <div className="md:flex justify-center gap-5 mt-10">
+    <div className="md:flex justify-center gap-5 mt-5 p-10">
       <div className="md:w-72">
         <h1 className="text-2xl text-gray-600 font-bold mb-5 ml-5 underline ">
           Category Item{" "}
         </h1>
-        <ul className="menu menu-compact dropdown-content gap-3 mt-3 p-2 shadow bg-transparent rounded-box md:w-52">
+        <ul className="menu menu-compact dropdown-content gap-3 mt-3 p-2 shadow bg-transparent rounded-box md:w-52 ">
           {categories.length &&
             categories.map((category, i) => (
               <li key={category._id}>
@@ -52,7 +58,7 @@ const Categories = () => {
             {" "}
             Phone Features
           </h1>
-          <div className="md:flex justify-between text-gray-400 font-light text-xs">
+          <div className="px-2 md:flex justify-between text-gray-400 font-light text-xs">
             <p className="font-serif">
               {" "}
               Sort by: <span className="font-bold">Best selling</span>

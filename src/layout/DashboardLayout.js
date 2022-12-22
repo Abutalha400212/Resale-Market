@@ -21,14 +21,14 @@ const DashboardLayout = () => {
     });
   };
   return (
-    <div className="md:flex justify-between mt-10 ">
+    <div className="md:flex justify-between mt-10 w-11/12 mx-auto">
       <div className="mr-5">
         {admin ? <AdminForm /> : <>{seller ? <SellersForm /> : <UserForm />}</>}
         <Link to="/category" className="flex items-center mt-20 underline">
           <ShoppingBagIcon className="w-6 h-6 font-extrabold mr-1" />
           Back To Shop
         </Link>
-        <Link to="/" className="flex items-center mt-5 underline">
+        <Link to="/" className="flex items-center mt-5 underline mr-3">
           <BuildingStorefrontIcon className="w-6 h-6 font-extrabold mr-1" />
           Back To Home
         </Link>
