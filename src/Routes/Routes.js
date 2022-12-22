@@ -122,7 +122,7 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         loader: ({ params }) =>
-          fetch(`https://mobile-x-server.vercel.app/booking/${params.id}`),
+          fetch(`http://localhost:5000/booking/${params.id}`),
         element: (
           <UserRoute>
             <Payment />

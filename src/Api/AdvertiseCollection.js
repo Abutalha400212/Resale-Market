@@ -1,10 +1,10 @@
-const axios = require('axios');
+
 
 export const advertiseCollect = async (advertise) => {
 
-  // const {data} = await axios.post('https://mobile-x-server.vercel.app/advertise',advertise)
+  // const {data} = await axios.post('http://localhost:5000/advertise',advertise)
   // return data
-    const res = await fetch(`https://mobile-x-server.vercel.app/advertise`, {
+    const res = await fetch(`http://localhost:5000/advertise`, {
 
       method: "POST",
       headers: {

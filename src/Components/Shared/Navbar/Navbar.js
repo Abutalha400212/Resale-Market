@@ -2,17 +2,20 @@ import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { categories } from "../../../Api/CategoryApi";
 import { AuthContext } from "../../../Context/AuthProvider";
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut,setCategoriesItem} = useContext(AuthContext);
   const handleLogOut = () => {
     logOut().then(() => {
       toast.success("Account LogOut");
       navigate("/");
     });
   };
-
+const handleAllData =()=>{
+  categories().then(data=>setCategoriesItem(data))
+}
   const navItem = (
     <>
       <li>
@@ -30,6 +33,7 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/category"
+          onClick={handleAllData}
           className={({ isActive }) =>
             `flex items-center px-4 m-0.5 rounded-md transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
               isActive ? "bg-gray-300  text-gray-700" : "bg-gray-100"

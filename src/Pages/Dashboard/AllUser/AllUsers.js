@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { deleteUserAccount, usersByUserType } from "../../../Api/UserCollection";
+import Loader from "../../../Components/Loader/Loader";
+import { AuthContext } from "../../../Context/AuthProvider";
 
 const AllUsers = () => {
     const account = "user"
     const [users,setUsers] = useState([])
-    usersByUserType(account).then(data => setUsers(data))
+    const {loading,setLoading} = useContext(AuthContext)
+    useEffect(()=>{
+      usersByUserType(account).then(data =>{
+        setUsers(data)
+        setLoading(false)
+      })
+      
+    },[loading,setLoading])
+   
     const handleUserDelete = user =>{
       deleteUserAccount(user._id).then(data =>{
         if(data.acknowledged){
           toast.success(`${user.name} User Deleted Successfully`)
         }
       })
+    }
+    if(loading){
+      return <Loader/>
     }
   return (
     <div className="overflow-x-auto  mt-10">

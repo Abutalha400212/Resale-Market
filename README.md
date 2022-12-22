@@ -1,4 +1,4 @@
-# Tourist
+# Resale Market
 
 A Servicing platform for E Commerce.
 
@@ -27,5 +27,5 @@ Product Photos -> [Freepic](https://www.freepik.com/)
 
 admin pannel
 
-adminEmail: <abu@talha.com>
-adminPassword: <12345678>
+adminEmail: abu@talha.com
+adminPassword: 12345678

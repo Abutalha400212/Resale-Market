@@ -5,12 +5,17 @@ import {
   getAddedSellersProduct,
 } from "../../../Api/CategoryApi";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
+import Loader from "../../../Components/Loader/Loader";
 const MyProducts = () => {
-  const { user } = useContext(AuthContext);
+  const { user,loading,setLoading } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
-  getAddedSellersProduct(user?.email).then((data) => {
-    setProducts(data);
-  });
+  useEffect(()=>{
+    getAddedSellersProduct(user?.email).then((data) => {
+      setProducts(data);
+      setLoading(false)
+    });
+  },[user?.email,loading,setLoading])
   const handleDelete = (product) => {
     deleteAddeddata(product._id).then((data) => {
       if (data.acknowledged) {
@@ -18,6 +23,9 @@ const MyProducts = () => {
       }
     });
   };
+  if(loading){
+    return <Loader/>
+  }
   return (
     <div className="overflow-x-auto  mt-10">
       <table className="w-full table">

@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { deleteUserAccount, usersBySellerType, userVerify } from '../../../Api/UserCollection';
+import Loader from '../../../Components/Loader/Loader';
+import { AuthContext } from '../../../Context/AuthProvider';
 
 const AllSeller = () => {
+  const {loading,setLoading} = useContext(AuthContext)
     const account = "seller"
     const [users,setUsers] = useState([])
-    usersBySellerType(account).then(data => setUsers(data))
+    useEffect(()=>{
+      usersBySellerType(account)
+      .then(data => {
+        setUsers(data)
+        setLoading(false)
+      })
+    },[loading,setLoading])
     const handleDeleteSeller = user =>{
       deleteUserAccount(user._id).then(data =>{
         if(data.acknowledged){
@@ -19,6 +30,9 @@ const AllSeller = () => {
           toast.success(`${user.name} is Verified Seller`)
         }
       })
+    }
+    if(loading){
+      return <Loader/>
     }
     return (
         <div className="overflow-x-auto  mt-10">

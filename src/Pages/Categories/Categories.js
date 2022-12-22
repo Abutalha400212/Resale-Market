@@ -7,22 +7,20 @@ import PrivateRoute from "../../Routes/PrivateRoute";
 import Loader from '../../Components/Loader/Loader'
 import { useEffect } from "react";
 const Categories = () => {
-  const { loading,setLoading } = useContext(AuthContext);
+  const { loading,setLoading,categoriesItem, setCategoriesItem } = useContext(AuthContext);
   const [handleShop, setHandleShop] = useState(null);
-  const [categoriesItem, setCategoriesItem] = useState([]);
   const [categories, setCategories] = useState([]);
-
+console.log(categoriesItem);
 useEffect(()=>{
   category().then((data) => {
     setCategories(data);
     setLoading(false)
   });
 },[loading,setLoading])
- 
   const handleCategoryData = (item) => {
     categoryItem(item).then((data) => {
-      setLoading(false)
       setCategoriesItem(data);
+       setLoading(false)
     });
   };
   if (loading) {
@@ -35,7 +33,7 @@ useEffect(()=>{
           Category Item{" "}
         </h1>
         <ul className="menu menu-compact dropdown-content gap-3 mt-3 p-2 shadow bg-transparent rounded-box md:w-52 ">
-          {categories.length &&
+          {
             categories.map((category, i) => (
               <li key={category._id}>
                 <button

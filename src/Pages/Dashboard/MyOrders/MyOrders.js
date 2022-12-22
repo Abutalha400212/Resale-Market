@@ -3,14 +3,15 @@ import React, { useContext} from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { deleteBookingItem } from "../../../Api/OrderBooking";
+import Loader from "../../../Components/Loader/Loader";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 const MyOrders = () => {
   const { user} = useContext(AuthContext);
-  const { data: products=[], refetch } = useQuery({
+  const { data: products=[], refetch,isLoading } = useQuery({
     queryKey: ["booking", user?.email],
     queryFn: () =>
-      fetch(`https://mobile-x-server.vercel.app/booking?email=${user?.email}`,{
+      fetch(`http://localhost:5000/booking?email=${user?.email}`,{
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -27,7 +28,9 @@ refetch()
     })
   }
 
-
+if(isLoading){
+  return <Loader/>
+}
 
   return (
     <div className="overflow-x-auto mt-10 ">

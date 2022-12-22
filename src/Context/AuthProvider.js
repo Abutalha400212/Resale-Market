@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
     const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState({});
   const [loading,setLoading] = useState(true)
+  const [categoriesItem, setCategoriesItem] = useState([]);
   const auth = getAuth(app);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -55,7 +56,8 @@ const AuthProvider = ({ children }) => {
     signIn,
     logOut,
     loading,
-    setLoading
+    setLoading,
+    categoriesItem, setCategoriesItem
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
