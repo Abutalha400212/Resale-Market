@@ -1,19 +1,19 @@
 export const category = async () => {
-  const res = await fetch("http://localhost:5000/category")
+  const res = await fetch("https://mobile-x-server.vercel.app/category")
   const data = await res.json();
   return data;
 };
 
 export const categoryItem = async (brand) => {
   const res = await fetch(
-    `http://localhost:5000/categoriesItem?brand=${brand}`
+    `https://mobile-x-server.vercel.app/categoriesItem?brand=${brand}`
   );
   const data = await res.json();
   return data;
 };
 export const categories = async () => {
   const res = await fetch(
-    `http://localhost:5000/categories`
+    `https://mobile-x-server.vercel.app/categories`
   );
   const data = await res.json();
   return data;
@@ -21,7 +21,7 @@ export const categories = async () => {
 
 
 export const addCategoryItem = async (product) => {
-  const res = await fetch(`http://localhost:5000/addCategoryItem`, {
+  const res = await fetch(`https://mobile-x-server.vercel.app/addCategoryItem`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -34,7 +34,7 @@ export const addCategoryItem = async (product) => {
 };
 
 export const getAddedSellersProduct = async (email) => {
-  const res = await fetch(`http://localhost:5000/myProducts?email=${email}`, {
+  const res = await fetch(`https://mobile-x-server.vercel.app/myProducts?email=${email}`, {
     headers: {
       authorization: `bearer ${localStorage.getItem("accessToken")}`,
     },
@@ -44,7 +44,7 @@ export const getAddedSellersProduct = async (email) => {
 };
 
 export const deleteAddeddata = async (id) => {
-  const res = await fetch(`http://localhost:5000/myProducts/${id}`, {
+  const res = await fetch(`https://mobile-x-server.vercel.app/myProducts/${id}`, {
     method: "DELETE",
     headers: {
       authorization: `bearer ${localStorage.getItem("accessToken")}`,
